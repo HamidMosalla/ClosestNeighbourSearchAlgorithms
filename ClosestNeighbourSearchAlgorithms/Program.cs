@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce;
 using ClosestNeighbourSearchAlgorithms.KDTree;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
@@ -11,7 +12,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 50;
+            var numberOfCoordinates = 10000;
             var listOfPoints = new List<Coordinate>();
             var dictionaryOfPoints = new Dictionary<int, Coordinate>();
             var hashSetOfPoints = new HashSet<Coordinate>();
@@ -53,27 +54,10 @@ namespace ClosestNeighbourSearchAlgorithms
             }
 
             ////==========================================================================================
-            //var stopwatch1 = new Stopwatch();
-
-            //stopwatch1.Start();
-
-            //var coordinateClusters1 = new PathClusterFinder(listOfPoints).GetBatchOfPointCluster(50);
-
-            //stopwatch1.Stop();
-
-            //var elapsedTimeForcoordinateClusters1 = stopwatch1.ElapsedMilliseconds;
-
-            //Console.WriteLine($"Lame PathFiner Took: {elapsedTimeForcoordinateClusters1} Milliseconds");
-
-            ////==========================================================================================
-
-
-
-            ////==========================================================================================
             //var stopwatch2 = new Stopwatch();
             //stopwatch2.Start();
 
-            //var coordinateClustersList = new PathClusterFinderWithList(listOfPoints, 50).GetPointClusters().ToList();
+            //var coordinateClustersList = new PathClusterFinderWithList(listOfPoints, 15).GetPointClusters().ToList();
 
             //stopwatch2.Stop();
 
@@ -96,7 +80,7 @@ namespace ClosestNeighbourSearchAlgorithms
             //Console.WriteLine($"PathClusterFinderWith Dictionary Took: {elapsedTimeForcoordinateClustersDictionary} Milliseconds");
             ////==========================================================================================
 
-            //==========================================================================================
+            ////==========================================================================================
             //var stopwatch4 = new Stopwatch();
             //stopwatch4.Start();
 
@@ -107,7 +91,7 @@ namespace ClosestNeighbourSearchAlgorithms
             //var elapsedTimeForcoordinateClustersHashSet = stopwatch4.ElapsedMilliseconds;
 
             //Console.WriteLine($"PathClusterFinderWith HashSet Took: {elapsedTimeForcoordinateClustersHashSet} Milliseconds");
-            //==========================================================================================
+            ////==========================================================================================
 
 
             //==========================================================================================
@@ -121,8 +105,10 @@ namespace ClosestNeighbourSearchAlgorithms
             //    var linearResult = tree.NearestNeighbors(arrayOfPoints[50 * i], 50);
             //}
 
-           // var linearResult = tree.NearestNeighbors(listOfPoints[0], 10);
-            var line = tree.NearestNeighborsCollection(15).ToList();
+            //var linearResult = tree.NearestNeighbors(listOfPoints[0], 15);
+            //var line = tree.NearestNeighborsCollection(15).ToList();
+
+            var nearDear = new PathClusterFinderWithKdTree(hashSetOfPoints, 50).GetPointClusters().ToList();
 
             stopwatch5.Stop();
 

@@ -10,29 +10,21 @@ namespace ClosestNeighbourSearchAlgorithms
         private readonly HashSet<Coordinate> _coordinates;
         private readonly int _pointsPerCluster;
 
-        public PathClusterFinderWithKdTree(KDTree<Coordinate> kdTree , HashSet<Coordinate> coordinates, int pointsPerCluster)
+        public PathClusterFinderWithKdTree(HashSet<Coordinate> coordinates, int pointsPerCluster)
         {
             _coordinates = coordinates;
             _pointsPerCluster = pointsPerCluster;
         }
 
-        public IEnumerable<Dictionary<long, Coordinate>> GetPointClusters()
+        public IEnumerable<List<Coordinate>> GetPointClusters()
         {
             while (_coordinates.Any())
             {
-                const int seedItself = 1;
-
                 var seed = _coordinates.First();
 
-                var closestCoordinates = _coordinates.AsParallel()
-                                                     .Where(c => !Equals(c, seed))
-                                                     .OrderBy(c => seed.Distance(c))
-                                                     .Take(_pointsPerCluster - seedItself)
-                                                     .ToDictionary(c => c.CoordinateId, c => c);
+                var closestCoordinates = new KDTree<Coordinate>(2, _coordinates.ToArray(), Utilities.L2Norm_Squared_Coordinate).NearestNeighbors(seed, _pointsPerCluster);
 
-                closestCoordinates.Add(seed.CoordinateId, seed);
-
-                closestCoordinates.ToList().ForEach(c => _coordinates.Remove(c.Value));
+                closestCoordinates.ForEach(c => _coordinates.Remove(c));
 
                 yield return closestCoordinates;
             }
