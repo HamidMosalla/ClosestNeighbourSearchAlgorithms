@@ -110,7 +110,6 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
         #endregion
 
-
         #region Searches
 
         public static T[] LinearSearch<T>(T[][] data, T[] point, Func<T[], T[], float> metric)
@@ -200,5 +199,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         }
 
         #endregion
+
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source) => new HashSet<T>(source);
     }
 }

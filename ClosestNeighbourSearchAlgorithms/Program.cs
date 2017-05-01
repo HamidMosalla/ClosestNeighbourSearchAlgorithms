@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using ClosestNeighbourSearchAlgorithms.KDTree;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
@@ -10,7 +11,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 2000000;
+            var numberOfCoordinates = 50;
             var listOfPoints = new List<Coordinate>();
             var dictionaryOfPoints = new Dictionary<int, Coordinate>();
             var hashSetOfPoints = new HashSet<Coordinate>();
@@ -115,12 +116,13 @@ namespace ClosestNeighbourSearchAlgorithms
 
             var tree = new KDTree<Coordinate>(2, arrayOfPoints, Utilities.L2Norm_Squared_Coordinate);
 
-            for (int i = 0; i < arrayOfPoints.Length / 50; i++)
-            {
-                var linearResult = tree.NearestNeighbors(arrayOfPoints[50 * i], 50);
-            }
+            //for (int i = 0; i < arrayOfPoints.Length / 50; i++)
+            //{
+            //    var linearResult = tree.NearestNeighbors(arrayOfPoints[50 * i], 50);
+            //}
 
-            //var linearResult = tree.NearestNeighbors(listOfPoints[0], 50);
+           // var linearResult = tree.NearestNeighbors(listOfPoints[0], 10);
+            var line = tree.NearestNeighborsCollection(15).ToList();
 
             stopwatch5.Stop();
 
@@ -131,23 +133,23 @@ namespace ClosestNeighbourSearchAlgorithms
 
 
             //==========================================================================================
-            var stopwatch6 = new Stopwatch();
-            stopwatch6.Start();
+            //var stopwatch6 = new Stopwatch();
+            //stopwatch6.Start();
 
-            var tree2 = new KDTree<Coordinate>(2, arrayOfPoints, Utilities.L2Norm_Squared_Coordinate);
+            //var tree2 = new KDTree<Coordinate>(2, arrayOfPoints, Utilities.L2Norm_Squared_Coordinate);
 
-            for (int i = 0; i < arrayOfPoints.Length / 50; i++)
-            {
-                var radialResult = tree2.RadialSearch(arrayOfPoints[50 * i], 10000, 50);
-            }
+            //for (int i = 0; i < arrayOfPoints.Length / 50; i++)
+            //{
+            //    var radialResult = tree2.RadialSearch(arrayOfPoints[50 * i], 10000, 50);
+            //}
 
-            //var radialResult = tree2.RadialSearch(treePoints2[0], 10000, 50);
+            ////var radialResult = tree2.RadialSearch(treePoints2[0], 10000, 50);
 
-            stopwatch6.Stop();
+            //stopwatch6.Stop();
 
-            var elapsedTimeForcoordinateClustersKdTreeRadial = stopwatch6.ElapsedMilliseconds;
+            //var elapsedTimeForcoordinateClustersKdTreeRadial = stopwatch6.ElapsedMilliseconds;
 
-            Console.WriteLine($"PathClusterFinderWith KdTree Radial Took: {elapsedTimeForcoordinateClustersKdTreeRadial} Milliseconds");
+            //Console.WriteLine($"PathClusterFinderWith KdTree Radial Took: {elapsedTimeForcoordinateClustersKdTreeRadial} Milliseconds");
             //==========================================================================================
         }
 

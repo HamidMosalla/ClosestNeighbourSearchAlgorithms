@@ -97,6 +97,27 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         }
 
         /// <summary>
+        /// Finds the nearest neighbors in the <see cref="KDTree{TDimension}"/> of the given <paramref name="point"/>.
+        /// </summary>
+        /// <param name="targetPoint">The point whose neighbors we search for.</param>
+        /// <param name="neighbors">The number of neighbors to look for.</param>
+        /// <returns>The</returns>
+        public IEnumerable<IEnumerable<TDimension>> NearestNeighborsCollection(int neighbors)
+        {
+            while (InternalPointArray.Any(a => !a.Equals(default(TDimension))))
+            {
+                var targetPoint = InternalPointArray.First(a => !a.Equals(default(TDimension)));
+                var nodeIndex = InternalPointArray.ToList().FindIndex(i => i.CoordinateId == targetPoint.CoordinateId);
+
+                var nearestNeighborList = new BoundedPriorityList<int, double>(neighbors, true);
+                var rect = HyperRect<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
+                this.SearchForNearestNeighbors(nodeIndex, targetPoint, rect, 0, nearestNeighborList, double.MaxValue);
+
+                yield return nearestNeighborList.ToResultSetAndRemove(this);
+            }
+        }
+
+        /// <summary>
         /// Searches for the closest points in a hyper-sphere around the given center.
         /// </summary>
         /// <param name="center">The center of the hyper-sphere</param>
@@ -197,7 +218,8 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             BoundedPriorityList<int, double> nearestNeighbors,
             double maxSearchRadiusSquared)
         {
-            if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex] == null) { return; }
+            //if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex] == null) { return; }
+            if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex].CoordinateId == 0) { return; }
 
             // Work out the current dimension
             var dim = dimension % this.Dimensions;

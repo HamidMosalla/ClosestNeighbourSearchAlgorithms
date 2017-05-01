@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
+using ClosestNeighbourSearchAlgorithms.KDTree;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
@@ -9,7 +10,7 @@ namespace ClosestNeighbourSearchAlgorithms
         private readonly HashSet<Coordinate> _coordinates;
         private readonly int _pointsPerCluster;
 
-        public PathClusterFinderWithKdTree(HashSet<Coordinate> coordinates, int pointsPerCluster)
+        public PathClusterFinderWithKdTree(KDTree<Coordinate> kdTree , HashSet<Coordinate> coordinates, int pointsPerCluster)
         {
             _coordinates = coordinates;
             _pointsPerCluster = pointsPerCluster;
@@ -36,8 +37,5 @@ namespace ClosestNeighbourSearchAlgorithms
                 yield return closestCoordinates;
             }
         }
-
-
-
     }
 }
