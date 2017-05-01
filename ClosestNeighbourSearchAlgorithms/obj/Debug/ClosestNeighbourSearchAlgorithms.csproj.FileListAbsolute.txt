@@ -1,0 +1,5 @@
+H:\Projects\Code Bits\Sample Projects\ClosestNeighbourSearchAlgorithms\ClosestNeighbourSearchAlgorithms\bin\Debug\ClosestNeighbourSearchAlgorithms.exe.config
+H:\Projects\Code Bits\Sample Projects\ClosestNeighbourSearchAlgorithms\ClosestNeighbourSearchAlgorithms\bin\Debug\ClosestNeighbourSearchAlgorithms.exe
+H:\Projects\Code Bits\Sample Projects\ClosestNeighbourSearchAlgorithms\ClosestNeighbourSearchAlgorithms\bin\Debug\ClosestNeighbourSearchAlgorithms.pdb
+H:\Projects\Code Bits\Sample Projects\ClosestNeighbourSearchAlgorithms\ClosestNeighbourSearchAlgorithms\obj\Debug\ClosestNeighbourSearchAlgorithms.exe
+H:\Projects\Code Bits\Sample Projects\ClosestNeighbourSearchAlgorithms\ClosestNeighbourSearchAlgorithms\obj\Debug\ClosestNeighbourSearchAlgorithms.pdb

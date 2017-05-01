@@ -1,0 +1,14 @@
+﻿Two million with two dimensional double type as a point:
+PathClusterFinderWith KdTree Linear Took: 23554 Milliseconds
+PathClusterFinderWith KdTree Radial Took: 22279 Milliseconds
+
+Two million points, with coordinate Id attached to node generic argument:
+PathClusterFinderWith KdTree Linear Took: 40390 Milliseconds (unacceptable)
+
+Two million points, with built in type changed to accept coordinate (reference type):
+PathClusterFinderWith KdTree Linear Took: 24508 Milliseconds
+PathClusterFinderWith KdTree Radial Took: 22849 Milliseconds
+
+Two million points, with built in type changed to accept coordinate (value type):
+PathClusterFinderWith KdTree Linear Took: 16726 Milliseconds
+PathClusterFinderWith KdTree Radial Took: 15672 Milliseconds
