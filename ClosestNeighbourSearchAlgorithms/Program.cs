@@ -12,7 +12,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 10000;
+            var numberOfCoordinates = 100000;
             var listOfPoints = new List<Coordinate>();
             var dictionaryOfPoints = new Dictionary<int, Coordinate>();
             var hashSetOfPoints = new HashSet<Coordinate>();
@@ -108,7 +108,7 @@ namespace ClosestNeighbourSearchAlgorithms
             //var linearResult = tree.NearestNeighbors(listOfPoints[0], 15);
             //var line = tree.NearestNeighborsCollection(15).ToList();
 
-            var nearDear = new PathClusterFinderWithKdTree(hashSetOfPoints, 50).GetPointClusters().ToList();
+            var nearDear = new PathClusterFinderWithKdTree(hashSetOfPoints, 500).GetPointClusters().ToList();
 
             stopwatch5.Stop();
 
