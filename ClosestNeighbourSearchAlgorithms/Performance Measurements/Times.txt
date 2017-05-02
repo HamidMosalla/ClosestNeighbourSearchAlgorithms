@@ -1,14 +1,20 @@
-﻿Two million with two dimensional double type as a point:
-PathClusterFinderWith KdTree Linear Took: 23554 Milliseconds
-PathClusterFinderWith KdTree Radial Took: 22279 Milliseconds
+﻿For 1,000 Points:
+Old PathClusterFinder Took: 202 Milliseconds
+PathClusterFinderWith List Took: 80 Milliseconds
+PathClusterFinderWith Dictionary Took: 41 Milliseconds
+PathClusterFinderWith HashSet Took: 14 Milliseconds
+PathClusterFinderWith WithOneKdTree Linear Took: 17 Milliseconds
+========================================================================================
+For 10,000 Points:
+Old PathClusterFinder Took: 37739 Milliseconds
+PathClusterFinderWith List Took: 4789 Milliseconds
+PathClusterFinderWith Dictionary Took: 78 Milliseconds
+PathClusterFinderWith HashSet Took: 47 Milliseconds
+PathClusterFinderWith WithOneKdTree Linear Took: 91 Milliseconds
+=========================================================================================
+For 1,000,000 Points:
+PathClusterFinderWith Dictionary Took: 441107 Milliseconds
+PathClusterFinderWith HashSet Took: 341262 Milliseconds
+PathClusterFinderWith WithOneKdTree Linear Took: 25306 Milliseconds
 
-Two million points, with coordinate Id attached to node generic argument:
-PathClusterFinderWith KdTree Linear Took: 40390 Milliseconds (unacceptable)
-
-Two million points, with built in type changed to accept coordinate (reference type):
-PathClusterFinderWith KdTree Linear Took: 24508 Milliseconds
-PathClusterFinderWith KdTree Radial Took: 22849 Milliseconds
-
-Two million points, with built in type changed to accept coordinate (value type):
-PathClusterFinderWith KdTree Linear Took: 16726 Milliseconds
-PathClusterFinderWith KdTree Radial Took: 15672 Milliseconds
+Note: brute force algorithms practically incapable of operating if the number of points are high.

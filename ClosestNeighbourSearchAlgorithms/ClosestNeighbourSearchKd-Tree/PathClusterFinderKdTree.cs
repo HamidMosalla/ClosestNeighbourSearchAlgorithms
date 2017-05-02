@@ -5,15 +5,17 @@ using ClosestNeighbourSearchAlgorithms.KDTree;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
-    class PathClusterFinderNewPerLoopKdTree
+    class PathClusterFinderKdTree
     {
         private readonly HashSet<Coordinate> _coordinates;
         private readonly int _pointsPerCluster;
+        private readonly KDTree<Coordinate> _kdTree;
 
-        public PathClusterFinderNewPerLoopKdTree(HashSet<Coordinate> coordinates, int pointsPerCluster)
+        public PathClusterFinderKdTree(KDTree<Coordinate> kdTree, HashSet<Coordinate> coordinates, int pointsPerCluster)
         {
             _coordinates = coordinates;
             _pointsPerCluster = pointsPerCluster;
+            _kdTree = kdTree;
         }
 
         public IEnumerable<List<Coordinate>> GetPointClusters()
@@ -22,7 +24,7 @@ namespace ClosestNeighbourSearchAlgorithms
             {
                 var seed = _coordinates.First();
 
-                var closestCoordinates = new KDTree<Coordinate>(2, _coordinates.ToArray(), Utilities.L2Norm_Squared_Coordinate).NearestNeighbors(seed, _pointsPerCluster);
+                var closestCoordinates = _kdTree.NearestNeighbors(seed, _pointsPerCluster);
 
                 closestCoordinates.ForEach(c => _coordinates.Remove(c));
 

@@ -58,8 +58,7 @@
     <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\HyperRect.cs" />
     <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\KDTree.cs" />
     <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\Utilities.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\PathClusterFinderNewPerLoopKdTree.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\PathClusterFinderWithOneKdTree.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\PathClusterFinderKdTree.cs" />
     <Compile Include="ClosestPairOfPointSweepLine\ClosestPairOfPointFinder.cs" />
     <Compile Include="ClosestPairOfPointSweepLine\Coordinate.cs" />
     <Compile Include="ModelsAndContracts\Coordinate.cs" />

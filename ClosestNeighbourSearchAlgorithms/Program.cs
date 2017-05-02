@@ -13,7 +13,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 1000;
+            var numberOfCoordinates = 100000;
             var listOfPoints = new List<Coordinate>();
             var listOfPointClass = new List<CoordinateClass>();
             var dictionaryOfPoints = new Dictionary<int, Coordinate>();
@@ -21,6 +21,8 @@ namespace ClosestNeighbourSearchAlgorithms
             var hashSetOfPoints2 = new HashSet<Coordinate>();
             var hashSetOfPoints3 = new HashSet<Coordinate>();
             var arrayOfPoints = new Coordinate[numberOfCoordinates];
+
+            Console.WriteLine($"For {numberOfCoordinates.ToString("n0")} Points:");
 
             var rand = new Random();
             for (var i = 0; i < numberOfCoordinates; i++)
@@ -79,29 +81,29 @@ namespace ClosestNeighbourSearchAlgorithms
             }
 
             //////==========================================================================================
-            var stopwatch1 = new Stopwatch();
-            stopwatch1.Start();
+            //var stopwatch1 = new Stopwatch();
+            //stopwatch1.Start();
 
-            var oldPathClusterFinder = new PathClusterFinder(listOfPointClass).GetBatchOfPointCluster(500).ToList();
+            //var oldPathClusterFinder = new PathClusterFinder(listOfPointClass).GetBatchOfPointCluster(500).ToList();
 
-            stopwatch1.Stop();
+            //stopwatch1.Stop();
 
-            var elapsedTimeOldPathClusterFinder = stopwatch1.ElapsedMilliseconds;
+            //var elapsedTimeOldPathClusterFinder = stopwatch1.ElapsedMilliseconds;
 
-            Console.WriteLine($"Old PathClusterFinder Took: {elapsedTimeOldPathClusterFinder} Milliseconds");
+            //Console.WriteLine($"Old PathClusterFinder Took: {elapsedTimeOldPathClusterFinder} Milliseconds");
             //////==========================================================================================
 
             //////==========================================================================================
-            var stopwatch2 = new Stopwatch();
-            stopwatch2.Start();
+            //var stopwatch2 = new Stopwatch();
+            //stopwatch2.Start();
 
-            var coordinateClustersList = new PathClusterFinderWithList(listOfPoints, 500).GetPointClusters().ToList();
+            //var coordinateClustersList = new PathClusterFinderWithList(listOfPoints, 500).GetPointClusters().ToList();
 
-            stopwatch2.Stop();
+            //stopwatch2.Stop();
 
-            var elapsedTimeForcoordinateClustersList = stopwatch2.ElapsedMilliseconds;
+            //var elapsedTimeForcoordinateClustersList = stopwatch2.ElapsedMilliseconds;
 
-            Console.WriteLine($"PathClusterFinderWith List Took: {elapsedTimeForcoordinateClustersList} Milliseconds");
+            //Console.WriteLine($"PathClusterFinderWith List Took: {elapsedTimeForcoordinateClustersList} Milliseconds");
             //////==========================================================================================
 
 
@@ -109,7 +111,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch3 = new Stopwatch();
             stopwatch3.Start();
 
-            var coordinateClustersDictionary = new PathClusterFinderWithDictionary(dictionaryOfPoints, 50).GetPointClusters().ToList();
+            var coordinateClustersDictionary = new PathClusterFinderWithDictionary(dictionaryOfPoints, 500).GetPointClusters().ToList();
 
             stopwatch3.Stop();
 
@@ -122,7 +124,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch4 = new Stopwatch();
             stopwatch4.Start();
 
-            var coordinateClustersHashSet = new PathClusterFinderWithHashSet(hashSetOfPoints1, 28).GetPointClusters().ToList();
+            var coordinateClustersHashSet = new PathClusterFinderWithHashSet(hashSetOfPoints1, 500).GetPointClusters().ToList();
 
             stopwatch4.Stop();
 
@@ -131,27 +133,13 @@ namespace ClosestNeighbourSearchAlgorithms
             Console.WriteLine($"PathClusterFinderWith HashSet Took: {elapsedTimeForcoordinateClustersHashSet} Milliseconds");
             ////==========================================================================================
 
-
-            //==========================================================================================
-            var stopwatch5 = new Stopwatch();
-            stopwatch5.Start();
-
-            var nearestNewTreeForEveryLoop = new PathClusterFinderNewPerLoopKdTree(hashSetOfPoints2, 500).GetPointClusters().ToList();
-
-            stopwatch5.Stop();
-
-            var elapsedTimeForcoordinateClustersKdTreeNewTreeForEveryLoop = stopwatch5.ElapsedMilliseconds;
-
-            Console.WriteLine($"PathClusterFinderWith NewKdTreeForEveryLoop Linear Took: {elapsedTimeForcoordinateClustersKdTreeNewTreeForEveryLoop} Milliseconds");
-            //==========================================================================================
-
             //==========================================================================================
             var stopwatch6 = new Stopwatch();
             stopwatch6.Start();
 
             var tree = new KDTree<Coordinate>(2, arrayOfPoints, Utilities.L2Norm_Squared_Coordinate);
 
-            var nearestOneTreeForAll = new PathClusterFinderWithOneKdTree(tree, hashSetOfPoints3, 500).GetPointClusters().ToList();
+            var nearestOneTreeForAll = new PathClusterFinderKdTree(tree, hashSetOfPoints3, 500).GetPointClusters().ToList();
 
             stopwatch6.Stop();
 
