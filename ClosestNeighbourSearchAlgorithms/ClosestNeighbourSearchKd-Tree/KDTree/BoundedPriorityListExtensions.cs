@@ -27,6 +27,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             for (var i = 0; i < list.Count; i++)
             {
                 array.Add(tree.InternalPointArray[list[i]]);
+                tree.InternalPointArray[list[i]].Used = true;
             }
 
             return array;

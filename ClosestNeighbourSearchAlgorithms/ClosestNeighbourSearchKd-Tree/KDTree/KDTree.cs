@@ -285,7 +285,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
             // Try to add the current node to our nearest neighbors list
             distanceSquaredToTarget = this.Metric(this.InternalPointArray[nodeIndex], target);
-            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0)
+            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0 && this.InternalPointArray[nodeIndex].Used == false)
             {
                 nearestNeighbors.Add(nodeIndex, distanceSquaredToTarget);
             }

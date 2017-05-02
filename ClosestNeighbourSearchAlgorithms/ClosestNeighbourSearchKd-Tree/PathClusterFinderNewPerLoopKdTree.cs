@@ -5,12 +5,12 @@ using ClosestNeighbourSearchAlgorithms.KDTree;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
-    class PathClusterFinderWithKdTree
+    class PathClusterFinderNewPerLoopKdTree
     {
         private readonly HashSet<Coordinate> _coordinates;
         private readonly int _pointsPerCluster;
 
-        public PathClusterFinderWithKdTree(HashSet<Coordinate> coordinates, int pointsPerCluster)
+        public PathClusterFinderNewPerLoopKdTree(HashSet<Coordinate> coordinates, int pointsPerCluster)
         {
             _coordinates = coordinates;
             _pointsPerCluster = pointsPerCluster;

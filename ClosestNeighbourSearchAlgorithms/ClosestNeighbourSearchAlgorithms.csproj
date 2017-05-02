@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\AllPointDistance.cs" />
+    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\CoordinateClass.cs" />
+    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\PathClusterFinder.cs" />
+    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\PointCluster.cs" />
+    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\PointDistance.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithDictionary.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithHashSet.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithList.cs" />
@@ -52,7 +58,8 @@
     <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\HyperRect.cs" />
     <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\KDTree.cs" />
     <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\Utilities.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\PathClusterFinderWithKdTree.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\PathClusterFinderNewPerLoopKdTree.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\PathClusterFinderWithOneKdTree.cs" />
     <Compile Include="ClosestPairOfPointSweepLine\ClosestPairOfPointFinder.cs" />
     <Compile Include="ClosestPairOfPointSweepLine\Coordinate.cs" />
     <Compile Include="ModelsAndContracts\Coordinate.cs" />
