@@ -63,8 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KdTreeTests.cs" />
-    <Compile Include="PathClusterFinderWithListTests.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\KdTreeTests.cs" />
+    <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithListTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

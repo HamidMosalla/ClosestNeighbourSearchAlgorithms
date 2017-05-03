@@ -1,10 +1,8 @@
 ﻿using ClosestNeighbourSearchAlgorithms.KDTree;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
-using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce;
 using Xunit;
 using FluentAssertions;
 
@@ -79,8 +77,15 @@ namespace ClosestNeighbourSearchTests
                 .ToList();
 
             //Assert
-            kdTreeNeighboringPoints[0].OrderBy(k => k.CoordinateId).SequenceEqual(oldPathClusterFinderNeighboringPoints[0].OrderBy(o => o.CoordinateId)).Should().BeTrue();
-            kdTreeNeighboringPoints[1].OrderBy(k => k.CoordinateId).SequenceEqual(oldPathClusterFinderNeighboringPoints[1].OrderBy(o => o.CoordinateId)).Should().BeTrue();
+            kdTreeNeighboringPoints[0].OrderBy(k => k.CoordinateId)
+                                      .SequenceEqual(oldPathClusterFinderNeighboringPoints[0].OrderBy(o => o.CoordinateId))
+                                      .Should()
+                                      .BeTrue();
+
+            kdTreeNeighboringPoints[1].OrderBy(k => k.CoordinateId)
+                                      .SequenceEqual(oldPathClusterFinderNeighboringPoints[1].OrderBy(o => o.CoordinateId))
+                                      .Should()
+                                      .BeTrue();
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
 using ClosestNeighbourSearchAlgorithms.KDTree;
@@ -10,7 +7,7 @@ using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 using FluentAssertions;
 using Xunit;
 
-namespace ClosestNeighbourSearchTests
+namespace ClosestNeighbourSearchTests.ClosestNeighbourSearchBruteForce
 {
     public class PathClusterFinderWithListTests
     {

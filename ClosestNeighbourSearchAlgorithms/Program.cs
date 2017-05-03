@@ -22,31 +22,31 @@ namespace ClosestNeighbourSearchAlgorithms
 
             Console.WriteLine($"For {numberOfCoordinates.ToString("n0")} Points:");
 
-            ////==========================================================================================
-            var stopwatch1 = new Stopwatch();
-            stopwatch1.Start();
+            //////==========================================================================================
+            //var stopwatch1 = new Stopwatch();
+            //stopwatch1.Start();
 
-            var oldPathClusterFinder = new PathClusterFinder(listOfCoordinateClass).GetBatchOfPointCluster(500).ToList();
+            //var oldPathClusterFinder = new PathClusterFinder(listOfCoordinateClass).GetBatchOfPointCluster(500).ToList();
 
-            stopwatch1.Stop();
+            //stopwatch1.Stop();
 
-            var elapsedTimeOldPathClusterFinder = stopwatch1.ElapsedMilliseconds;
+            //var elapsedTimeOldPathClusterFinder = stopwatch1.ElapsedMilliseconds;
 
-            Console.WriteLine($"Old PathClusterFinder Took: {elapsedTimeOldPathClusterFinder} Milliseconds");
-            ////==========================================================================================
+            //Console.WriteLine($"Old PathClusterFinder Took: {elapsedTimeOldPathClusterFinder} Milliseconds");
+            //////==========================================================================================
 
-            ////==========================================================================================
-            var stopwatch2 = new Stopwatch();
-            stopwatch2.Start();
+            //////==========================================================================================
+            //var stopwatch2 = new Stopwatch();
+            //stopwatch2.Start();
 
-            var coordinateClustersList = new PathClusterFinderWithList(listOfCoordinates, 500).GetPointClusters().ToList();
+            //var coordinateClustersList = new PathClusterFinderWithList(listOfCoordinates, 500).GetPointClusters().ToList();
 
-            stopwatch2.Stop();
+            //stopwatch2.Stop();
 
-            var elapsedTimeForcoordinateClustersList = stopwatch2.ElapsedMilliseconds;
+            //var elapsedTimeForcoordinateClustersList = stopwatch2.ElapsedMilliseconds;
 
-            Console.WriteLine($"PathClusterFinderWith List Took: {elapsedTimeForcoordinateClustersList} Milliseconds");
-            ////==========================================================================================
+            //Console.WriteLine($"PathClusterFinderWith List Took: {elapsedTimeForcoordinateClustersList} Milliseconds");
+            //////==========================================================================================
 
 
             ////==========================================================================================
