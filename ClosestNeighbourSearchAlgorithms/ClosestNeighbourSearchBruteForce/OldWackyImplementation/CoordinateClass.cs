@@ -2,7 +2,7 @@
 {
     public class CoordinateClass
     {
-        public int CoordinateId { get; set; }
+        public long CoordinateId { get; set; }
         public decimal? PotansielAvalie { get; set; }
         public int TartibInRoad { get; set; }
         public int? IdPlaceTree { get; set; }

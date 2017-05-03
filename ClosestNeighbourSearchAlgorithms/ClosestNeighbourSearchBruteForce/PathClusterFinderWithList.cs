@@ -4,7 +4,7 @@ using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
 namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce
 {
-    class PathClusterFinderWithList
+    public class PathClusterFinderWithList
     {
         private readonly List<Coordinate> _coordinates;
         private readonly int _pointsPerCluster;

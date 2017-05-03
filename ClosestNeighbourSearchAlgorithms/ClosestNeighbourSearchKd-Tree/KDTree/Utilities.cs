@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
 namespace ClosestNeighbourSearchAlgorithms.KDTree
@@ -106,6 +107,24 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             }
 
             return data.ToArray();
+        }
+
+        public static IEnumerable<Coordinate> GenerateCoordinates(int numberOfCoordinates)
+        {
+            var rand = new Random();
+
+            for (var i = 0; i < numberOfCoordinates; i++)
+            {
+                var latitude = rand.Next(-10000, 10000);
+                var longitude = rand.Next(-10000, 10000);
+
+                yield return new Coordinate
+                {
+                    CoordinateId = i + 1,
+                    Latitude = latitude,
+                    Longitude = longitude,
+                };
+            }
         }
 
         #endregion

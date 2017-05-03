@@ -4,18 +4,18 @@ using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
 namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce
 {
-    class PathClusterFinderWithDictionary
+    public class PathClusterFinderWithDictionary
     {
-        private readonly Dictionary<int, Coordinate> _coordinates;
+        private readonly Dictionary<long, Coordinate> _coordinates;
         private readonly int _pointsPerCluster;
 
-        public PathClusterFinderWithDictionary(Dictionary<int, Coordinate> coordinates, int pointsPerCluster)
+        public PathClusterFinderWithDictionary(Dictionary<long, Coordinate> coordinates, int pointsPerCluster)
         {
             _coordinates = coordinates;
             _pointsPerCluster = pointsPerCluster;
         }
 
-        public IEnumerable<Dictionary<int, Coordinate>> GetPointClusters()
+        public IEnumerable<Dictionary<long, Coordinate>> GetPointClusters()
         {
             while (_coordinates.Any())
             {
