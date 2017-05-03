@@ -112,6 +112,29 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             return nearestNeighbors.ToResultSet(this);
         }
 
+
+        /// <summary>
+        /// Finds the nearest neighbors in the <see cref="KDTree{TDimension}"/> and returns them.
+        /// </summary>
+        /// <param name="pointsPerCluster">The number of points per cluster of neighbors.</param>
+        /// <param name="coordinates">All the coordinates that will be turned to neighbors</param>
+        /// <returns>IEnumerable<List<TDimension>></returns>
+        public IEnumerable<List<TDimension>> GetNeighborClusters(int pointsPerCluster, TDimension[] coordinates)
+        {
+            var coordinateSet = coordinates.ToHashSet();
+
+            while (coordinateSet.Any())
+            {
+                var seed = coordinateSet.First();
+
+                var closestCoordinates = NearestNeighbors(seed, pointsPerCluster);
+
+                closestCoordinates.ForEach(c => coordinateSet.Remove(c));
+
+                yield return closestCoordinates;
+            }
+        }
+
         /// <summary>
         /// Grows a KD tree recursively via median splitting. We find the median by doing a full sort.
         /// </summary>

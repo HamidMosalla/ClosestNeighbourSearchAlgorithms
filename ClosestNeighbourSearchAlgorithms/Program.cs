@@ -137,9 +137,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch6 = new Stopwatch();
             stopwatch6.Start();
 
-            var tree = new KDTree<Coordinate>(2, arrayOfPoints, Utilities.L2Norm_Squared_Coordinate);
-
-            var nearestOneTreeForAll = new PathClusterFinderKdTree(tree, hashSetOfPoints3, 500).GetPointClusters().ToList();
+            var neighboringPoints = new KDTree<Coordinate>(2, arrayOfPoints, Utilities.L2Norm_Squared_Coordinate).GetNeighborClusters(500, arrayOfPoints).ToList();
 
             stopwatch6.Stop();
 
