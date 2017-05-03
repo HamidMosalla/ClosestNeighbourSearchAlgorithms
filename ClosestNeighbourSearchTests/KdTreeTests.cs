@@ -1,5 +1,6 @@
 ﻿using ClosestNeighbourSearchAlgorithms.KDTree;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
@@ -11,29 +12,70 @@ namespace ClosestNeighbourSearchTests
 {
     public class KdTreeTests
     {
+        private readonly int _numberOfCoordinates;
+        private readonly int _pointPerCluster;
+        private readonly Coordinate[] _arrayOfCoordinates;
+        private readonly List<CoordinateClass> _listOfCoordinateClass;
+
+        public KdTreeTests()
+        {
+            _numberOfCoordinates = 1000;
+            _pointPerCluster = 500;
+            _arrayOfCoordinates = Utilities.GenerateCoordinates(_numberOfCoordinates).ToArray();
+            _listOfCoordinateClass = _arrayOfCoordinates.Select(a => new CoordinateClass
+            {
+                CoordinateId = a.CoordinateId,
+                Latitude = a.Latitude,
+                Longitude = a.Longitude
+            }).ToList();
+        }
+
+        [Fact]
+        public void GetNeighborClusters_ReturnTheCorrectNumberOfPoints_GivenANumber()
+        {
+            var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .ToList();
+
+            kdTreeNeighboringPoints[0].Count().Should().Be(_pointPerCluster);
+            kdTreeNeighboringPoints.SelectMany(p => p).Count().Should().Be(_numberOfCoordinates);
+        }
+
+        [Fact]
+        public void GetNeighborClusters_ReturnTheCorrectType()
+        {
+            var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .ToList();
+
+            kdTreeNeighboringPoints.Should().BeOfType<List<List<Coordinate>>>();
+        }
+
+        [Fact]
+        public void GetNeighborClusters_CalculateDistanceCorrectly()
+        {
+            var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .ToList();
+
+            var targetPoint = kdTreeNeighboringPoints[0].First();
+            var sortedPointsByDistance = _arrayOfCoordinates.OrderBy(a => a.Distance(targetPoint));
+
+            kdTreeNeighboringPoints[0].ElementAt(1).ShouldBeEquivalentTo(sortedPointsByDistance.ElementAt(1));
+        }
+
         [Fact]
         public void GetNeighborClusters_ReturnTheSameToursAsOldOne_GivenASetOfPoints()
         {
-            //Arrange
-            var numberOfCoordinates = 1000;
-            var arrayOfCoordinates = Utilities.GenerateCoordinates(numberOfCoordinates).ToArray();
-            var listOfCoordinateClass = arrayOfCoordinates
-                .Select(a => new CoordinateClass
-                {
-                    CoordinateId = a.CoordinateId,
-                    Latitude = a.Latitude,
-                    Longitude = a.Longitude
-                }).ToList();
-
             //Act
-            var oldPathClusterFinderNeighboringPoints = new PathClusterFinder(listOfCoordinateClass)
+            var oldPathClusterFinderNeighboringPoints = new PathClusterFinder(_listOfCoordinateClass)
                 .GetBatchOfPointCluster(500)
                 .Select(c => c.PointClusterCoordinates.Select(pc => new Coordinate { CoordinateId = pc.CoordinateId, Latitude = pc.Latitude, Longitude = pc.Longitude })
                 .ToList())
                 .ToList();
 
-            var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                .GetNeighborClusters(500, arrayOfCoordinates)
+            var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                .GetNeighborClusters(500, _arrayOfCoordinates)
                 .ToList();
 
             //Assert
