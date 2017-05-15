@@ -13,7 +13,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 100;
+            var numberOfCoordinates = 1000000;
             var arrayOfCoordinates = Utilities.GenerateCoordinates(numberOfCoordinates).ToArray();
             var listOfCoordinateClass = arrayOfCoordinates.Select(a => new CoordinateClass { CoordinateId = a.CoordinateId, Latitude = a.Latitude, Longitude = a.Longitude }).ToList();
             var listOfCoordinates = arrayOfCoordinates.ToList();
@@ -75,30 +75,30 @@ namespace ClosestNeighbourSearchAlgorithms
             //Console.WriteLine($"PathClusterFinderWith HashSet Took: {elapsedTimeForcoordinateClustersHashSet} Milliseconds");
             //////==========================================================================================
 
-            ////==========================================================================================
-            //var stopwatch6 = new Stopwatch();
-            //stopwatch6.Start();
+            //==========================================================================================
+            var stopwatch6 = new Stopwatch();
+            stopwatch6.Start();
 
-            //var neighboringPoints = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).GetNeighborClusters(50, arrayOfCoordinates).ToList();
+            var neighboringPoints = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).GetNeighborClusters(500, arrayOfCoordinates).ToList();
 
-            //stopwatch6.Stop();
+            stopwatch6.Stop();
 
-            //var elapsedTimeForcoordinateClustersKdTreeOneTreeForAll = stopwatch6.ElapsedMilliseconds;
+            var elapsedTimeForcoordinateClustersKdTreeOneTreeForAll = stopwatch6.ElapsedMilliseconds;
 
-            //Console.WriteLine($"PathClusterFinderWith WithOneKdTree Linear Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeForAll} Milliseconds");
-            ////==========================================================================================
+            Console.WriteLine($"PathClusterFinderWith WithOneKdTree Linear Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeForAll} Milliseconds");
+            //==========================================================================================
 
             //==========================================================================================
             var stopwatch7 = new Stopwatch();
             stopwatch7.Start();
 
-            var neighboringPointsRadial = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).GetNeighborClustersRadial(1000, 50, arrayOfCoordinates).ToList();
+            var neighboringPointsRadial = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).GetNeighborClustersRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
 
             stopwatch7.Stop();
 
             var elapsedTimeForcoordinateClustersKdTreeOneTreeRadialForAll = stopwatch7.ElapsedMilliseconds;
 
-            Console.WriteLine($"PathClusterFinderWith WithOneKdTree Linear Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeRadialForAll} Milliseconds");
+            Console.WriteLine($"PathClusterFinderWith WithOneKdTree Radial Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeRadialForAll} Milliseconds");
             //==========================================================================================
         }
 

@@ -109,7 +109,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             var rect = HyperRect<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
             this.SearchForNearestNeighbors(0, center, rect, 0, nearestNeighbors, radius);
 
-            return nearestNeighbors.ToResultSet(this);
+            return nearestNeighbors.ToResultSetRadial(this, neighboors);
         }
 
 
