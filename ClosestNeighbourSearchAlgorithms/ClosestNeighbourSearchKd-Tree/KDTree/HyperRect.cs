@@ -72,10 +72,10 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             rect.MinPoint = new T();
             rect.MaxPoint = new T();
 
-            rect.MinPoint.Latitude = Double.MinValue;
-            rect.MaxPoint.Latitude = Double.MaxValue;
-            rect.MinPoint.Longitude = Double.MinValue;
-            rect.MaxPoint.Longitude = Double.MaxValue;
+            rect.MinPoint.Latitude = negativeInfinity;
+            rect.MaxPoint.Latitude = positiveInfinity;
+            rect.MinPoint.Longitude = negativeInfinity;
+            rect.MaxPoint.Longitude = negativeInfinity;
 
             return rect;
         }
