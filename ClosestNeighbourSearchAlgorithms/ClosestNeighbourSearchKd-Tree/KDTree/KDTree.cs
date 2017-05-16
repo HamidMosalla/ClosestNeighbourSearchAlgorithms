@@ -260,7 +260,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             BoundedPriorityList<int, double> nearestNeighbors,
             double maxSearchRadiusSquared)
         {
-            if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex].CoordinateId == 0) { return; }
+            if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex].CoordinateId == 0) return;
 
             // Work out the current dimension
             var dim = dimension % this.Dimensions;

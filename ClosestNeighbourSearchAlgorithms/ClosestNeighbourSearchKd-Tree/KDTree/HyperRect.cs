@@ -7,24 +7,24 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
     /// <summary>
     /// Represents a hyper-rectangle. An N-Dimensional rectangle.
     /// </summary>
-    /// <typeparam name="T">The type of "dimension" in the metric space in which the hyper-rectangle lives.</typeparam>
-    public struct HyperRect<T> where T : IComparable<T>, ICoordinate, new()
+    /// <typeparam name="TDimension">The type of "dimension" in the metric space in which the hyper-rectangle lives.</typeparam>
+    public struct HyperRect<TDimension> where TDimension : IComparable<TDimension>, ICoordinate, new()
     {
         /// <summary>
         /// Backing field for the <see cref="MinPoint"/> property.
         /// </summary>
-        private T minPoint;
+        private TDimension minPoint;
 
         /// <summary>
         /// Backing field for the <see cref="MaxPoint"/> property.
         /// </summary>
-        private T maxPoint;
+        private TDimension maxPoint;
 
         /// <summary>
         /// The minimum point of the hyper-rectangle. One can think of this point as the
         /// bottom-left point of a 2-Dimensional rectangle.
         /// </summary>
-        public T MinPoint
+        public TDimension MinPoint
         {
             get
             {
@@ -34,7 +34,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                this.minPoint = new T();
+                this.minPoint = new TDimension();
                 value = this.minPoint;
             }
         }
@@ -43,7 +43,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// The maximum point of the hyper-rectangle. One can think of this point as the
         /// top-right point of a 2-Dimensional rectangle.
         /// </summary>
-        public T MaxPoint
+        public TDimension MaxPoint
         {
             get
             {
@@ -53,7 +53,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                this.maxPoint = new T();
+                this.maxPoint = new TDimension();
                 value = this.maxPoint;
             }
         }
@@ -65,12 +65,12 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <param name="positiveInfinity">The smallest possible values in any given dimension.</param>
         /// <param name="negativeInfinity">The largest possible values in any given dimension.</param>
         /// <returns>The hyper-rectangle which spans the entire metric space.</returns>
-        public static HyperRect<T> Infinite(int dimensions, double positiveInfinity, double negativeInfinity)
+        public static HyperRect<TDimension> Infinite(int dimensions, double positiveInfinity, double negativeInfinity)
         {
-            var rect = default(HyperRect<T>);
+            var rect = default(HyperRect<TDimension>);
 
-            rect.MinPoint = new T();
-            rect.MaxPoint = new T();
+            rect.MinPoint = new TDimension();
+            rect.MaxPoint = new TDimension();
 
             rect.MinPoint.Latitude = negativeInfinity;
             rect.MaxPoint.Latitude = positiveInfinity;
@@ -89,9 +89,9 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <param name="toPoint">We try to find a point in or on the rectangle closest to this point.</param>
         /// <returns>The point on or in the rectangle that is closest to the given point.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public T GetClosestPoint(T toPoint)
+        public TDimension GetClosestPoint(TDimension toPoint)
         {
-            var closest = new T();
+            var closest = new TDimension();
 
             if (this.minPoint.Latitude.CompareTo(toPoint.Latitude) > 0)
             {
@@ -122,11 +122,11 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// Clones the <see cref="HyperRect{T}"/>.
         /// </summary>
         /// <returns>A clone of the <see cref="HyperRect{T}"/></returns>
-        public HyperRect<T> Clone()
+        public HyperRect<TDimension> Clone()
         {
             // For a discussion of why we don't implement ICloneable
             // see http://stackoverflow.com/questions/536349/why-no-icloneablet
-            var rect = default(HyperRect<T>);
+            var rect = default(HyperRect<TDimension>);
             rect.MinPoint = this.MinPoint;
             rect.MaxPoint = this.MaxPoint;
             return rect;
