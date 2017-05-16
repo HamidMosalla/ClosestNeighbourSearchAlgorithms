@@ -10,51 +10,18 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
     /// <typeparam name="TDimension">The type of "dimension" in the metric space in which the hyper-rectangle lives.</typeparam>
     public struct HyperRect<TDimension> where TDimension : IComparable<TDimension>, ICoordinate, new()
     {
-        /// <summary>
-        /// Backing field for the <see cref="MinPoint"/> property.
-        /// </summary>
-        private TDimension minPoint;
-
-        /// <summary>
-        /// Backing field for the <see cref="MaxPoint"/> property.
-        /// </summary>
-        private TDimension maxPoint;
 
         /// <summary>
         /// The minimum point of the hyper-rectangle. One can think of this point as the
         /// bottom-left point of a 2-Dimensional rectangle.
         /// </summary>
-        public TDimension MinPoint
-        {
-            get
-            {
-                return this.minPoint;
-            }
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set
-            {
-                this.minPoint = value;
-            }
-        }
+        public TDimension MinPoint { get; set; }
 
         /// <summary>
         /// The maximum point of the hyper-rectangle. One can think of this point as the
         /// top-right point of a 2-Dimensional rectangle.
         /// </summary>
-        public TDimension MaxPoint
-        {
-            get
-            {
-                return this.maxPoint;
-            }
-
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set
-            {
-                this.maxPoint = value;
-            }
-        }
+        public TDimension MaxPoint { get; set; }
 
         /// <summary>
         /// Get a hyper rectangle which spans the entire implicit metric space.
@@ -92,21 +59,21 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         {
             var closest = new TDimension();
 
-            if (this.minPoint.Latitude.CompareTo(toPoint.Latitude) > 0)
+            if (this.MinPoint.Latitude.CompareTo(toPoint.Latitude) > 0)
             {
-                closest = this.minPoint;
+                closest = this.MinPoint;
             }
-            else if (this.maxPoint.Latitude.CompareTo(toPoint.Latitude) < 0)
+            else if (this.MaxPoint.Latitude.CompareTo(toPoint.Latitude) < 0)
             {
-                closest = this.maxPoint;
+                closest = this.MaxPoint;
             }
-            else if (this.minPoint.Longitude.CompareTo(toPoint.Longitude) < 0)
+            else if (this.MinPoint.Longitude.CompareTo(toPoint.Longitude) < 0)
             {
-                closest = this.minPoint;
+                closest = this.MinPoint;
             }
-            else if (this.maxPoint.Longitude.CompareTo(toPoint.Longitude) < 0)
+            else if (this.MaxPoint.Longitude.CompareTo(toPoint.Longitude) < 0)
             {
-                closest = this.maxPoint;
+                closest = this.MaxPoint;
             }
             else
             {

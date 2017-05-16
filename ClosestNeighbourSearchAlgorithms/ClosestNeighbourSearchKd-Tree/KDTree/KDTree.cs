@@ -25,7 +25,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <summary>
         /// The array in which the binary tree is stored. Enumerating this array is a level-order traversal of the tree.
         /// </summary>
-        public TDimension[] InternalPointArray { get; }
+        public TDimension[] InternalTreeOfPoints { get; }
 
         /// <summary>
         /// The metric function used to calculate distance between points.
@@ -36,7 +36,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <summary>
         /// Gets a <see cref="BinaryTreeNavigator{TPoint}"/> that allows for manual tree navigation,
         /// </summary>
-        public BinaryTreeNavigator<TDimension> Navigator => new BinaryTreeNavigator<TDimension>(this.InternalPointArray);
+        public BinaryTreeNavigator<TDimension> Navigator => new BinaryTreeNavigator<TDimension>(this.InternalTreeOfPoints);
         #endregion
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             // This is equivalent to finding the power of 2 greater than the number of points
             var elementCount = (int)Math.Pow(2, (int)(Math.Log(points.Length) / Math.Log(2)) + 1);
             this.Dimensions = dimensions;
-            this.InternalPointArray = Enumerable.Repeat(default(TDimension), elementCount).ToArray();
+            this.InternalTreeOfPoints = Enumerable.Repeat(default(TDimension), elementCount).ToArray();
             this.Metric = metric;
             this.Count = points.Length;
             this.GenerateTree(0, 0, points);
@@ -199,7 +199,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
             // The point with the median value all the current dimension now becomes the value of the current tree node
             // The previous node becomes the parents of the current node.
-            this.InternalPointArray[index] = medianPoint;
+            this.InternalTreeOfPoints[index] = medianPoint;
 
             // We now split the sorted points into 2 groups
             // 1st group: points before the median
@@ -221,7 +221,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             {
                 if (leftPoints.Length == 1)
                 {
-                    this.InternalPointArray[BinaryTreeNavigation.LeftChildIndex(index)] = leftPoints[0];
+                    this.InternalTreeOfPoints[BinaryTreeNavigation.LeftChildIndex(index)] = leftPoints[0];
                 }
             }
             else
@@ -234,7 +234,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             {
                 if (rightPoints.Length == 1)
                 {
-                    this.InternalPointArray[BinaryTreeNavigation.RightChildIndex(index)] = rightPoints[0];
+                    this.InternalTreeOfPoints[BinaryTreeNavigation.RightChildIndex(index)] = rightPoints[0];
                 }
             }
             else
@@ -260,7 +260,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             BoundedPriorityList<int, double> nearestNeighbors,
             double maxSearchRadiusSquared)
         {
-            if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex].CoordinateId == 0) return;
+            if (this.InternalTreeOfPoints.Length <= nodeIndex || nodeIndex < 0 || this.InternalTreeOfPoints[nodeIndex].CoordinateId == 0) return;
 
             // Work out the current dimension
             var dim = dimension % this.Dimensions;
@@ -268,13 +268,13 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             // Split our hyper-rectangle into 2 sub rectangles along the current
             // node's point on the current dimension
             var leftRect = rect.Clone();
-            leftRect.MaxPoint = this.InternalPointArray[nodeIndex];
+            leftRect.MaxPoint = this.InternalTreeOfPoints[nodeIndex];
 
             var rightRect = rect.Clone();
-            rightRect.MinPoint = this.InternalPointArray[nodeIndex];
+            rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex];
 
             // Determine which side the target resides in
-            var compare = target.CompareTo(this.InternalPointArray[nodeIndex]);
+            var compare = target.CompareTo(this.InternalTreeOfPoints[nodeIndex]);
 
             var nearerRect = compare <= 0 ? leftRect : rightRect;
             var furtherRect = compare <= 0 ? rightRect : leftRect;
@@ -325,8 +325,8 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             }
 
             // Try to add the current node to our nearest neighbors list
-            distanceSquaredToTarget = this.Metric(this.InternalPointArray[nodeIndex], target);
-            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0 && this.InternalPointArray[nodeIndex].Used == false)
+            distanceSquaredToTarget = this.Metric(this.InternalTreeOfPoints[nodeIndex], target);
+            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0 && this.InternalTreeOfPoints[nodeIndex].Used == false)
             {
                 nearestNeighbors.Add(nodeIndex, distanceSquaredToTarget);
             }

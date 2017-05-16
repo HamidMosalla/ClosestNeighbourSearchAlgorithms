@@ -27,8 +27,8 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             var array = new List<TDimension>();
             for (var i = 0; i < list.Count; i++)
             {
-                array.Add(tree.InternalPointArray[list[i]]);
-                tree.InternalPointArray[list[i]].Used = true;
+                array.Add(tree.InternalTreeOfPoints[list[i]]);
+                tree.InternalTreeOfPoints[list[i]].Used = true;
             }
 
             return array;
@@ -53,8 +53,8 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
             foreach (int t in list)
             {
-                clusterOfCoordinates.Add(tree.InternalPointArray[t]);
-                tree.InternalPointArray[t].Used = true;
+                clusterOfCoordinates.Add(tree.InternalTreeOfPoints[t]);
+                tree.InternalTreeOfPoints[t].Used = true;
             }
 
             return clusterOfCoordinates;
