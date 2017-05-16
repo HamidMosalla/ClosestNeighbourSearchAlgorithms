@@ -36,8 +36,5 @@ namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce
                 yield return closestCoordinates;
             }
         }
-
-
-
     }
 }

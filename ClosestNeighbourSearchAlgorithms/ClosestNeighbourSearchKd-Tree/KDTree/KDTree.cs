@@ -87,7 +87,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <param name="targetPoint">The point whose neighbors we search for.</param>
         /// <param name="neighbors">The number of neighbors to look for.</param>
         /// <returns>The</returns>
-        public List<TDimension> NearestNeighbors(TDimension targetPoint, int neighbors)
+        public List<TDimension> NearestNeighborsLinear(TDimension targetPoint, int neighbors)
         {
             var nearestNeighborList = new BoundedPriorityList<int, double>(neighbors, true);
             var rect = HyperRect<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
@@ -103,7 +103,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <param name="radius">The radius of the hyper-sphere</param>
         /// <param name="neighboors">The number of neighbors to return.</param>
         /// <returns>The specified number of closest points in the hyper-sphere</returns>
-        public List<TDimension> RadialSearch(TDimension center, double radius, int neighboors = -1)
+        public List<TDimension> NearestNeighborsRadial(TDimension center, double radius, int neighboors = -1)
         {
             var nearestNeighbors = new BoundedPriorityList<int, double>(neighboors == -1 ? this.Count : neighboors, false);
             var rect = HyperRect<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
@@ -127,7 +127,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             {
                 var seed = coordinateSet.First();
 
-                var closestCoordinates = NearestNeighbors(seed, pointsPerCluster);
+                var closestCoordinates = NearestNeighborsLinear(seed, pointsPerCluster);
 
                 closestCoordinates.ForEach(c => coordinateSet.Remove(c));
 
@@ -151,7 +151,9 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             {
                 var center = coordinateSet.First();
 
-                var closestCoordinates = RadialSearch(center, baseRadius, pointsPerCluster);
+                var closestCoordinates = NearestNeighborsRadial(center, baseRadius, pointsPerCluster);
+
+                if (coordinateSet.Count < pointsPerCluster) closestCoordinates = coordinateSet.ToList();
 
                 if (closestCoordinates == null)
                 {
@@ -174,7 +176,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         }
 
         /// <summary>
-        /// Grows a KD tree recursively via median splitting. We find the median by doing a full sort.
+        /// Grows a KD tree recursively via median splitting. We find the median by doing a full sort based on latitude.
         /// </summary>
         /// <param name="index">The array index for the current node.</param>
         /// <param name="dim">The current splitting dimension.</param>
@@ -189,11 +191,11 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             // https://en.wikipedia.org/wiki/K-d_tree
 
             // sort the points along the current dimension
-            var sortedPoints = points.OrderBy(z => z.Latitude).ToArray();
+            var sortedPoints = points.OrderBy(p => p.Latitude).ToArray();
 
             // get the point which has the median value of the current dimension.
             var medianPoint = sortedPoints[points.Count / 2];
-            var medianPointIdx = sortedPoints.Length / 2;
+            var medianPointIndex = sortedPoints.Length / 2;
 
             // The point with the median value all the current dimension now becomes the value of the current tree node
             // The previous node becomes the parents of the current node.
@@ -201,12 +203,12 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
             // We now split the sorted points into 2 groups
             // 1st group: points before the median
-            var leftPoints = new TDimension[medianPointIdx];
+            var leftPoints = new TDimension[medianPointIndex];
             Array.Copy(sortedPoints.ToArray(), leftPoints, leftPoints.Length);
 
             // 2nd group: Points after the median
-            var rightPoints = new TDimension[sortedPoints.Length - (medianPointIdx + 1)];
-            Array.Copy(sortedPoints.ToArray(), medianPointIdx + 1, rightPoints, 0, rightPoints.Length);
+            var rightPoints = new TDimension[sortedPoints.Length - (medianPointIndex + 1)];
+            Array.Copy(sortedPoints.ToArray(), medianPointIndex + 1, rightPoints, 0, rightPoints.Length);
 
             // We new recurse, passing the left and right arrays for arguments.
             // The current node's left and right values become the "roots" for
@@ -258,7 +260,6 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             BoundedPriorityList<int, double> nearestNeighbors,
             double maxSearchRadiusSquared)
         {
-            //if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex] == null) { return; }
             if (this.InternalPointArray.Length <= nodeIndex || nodeIndex < 0 || this.InternalPointArray[nodeIndex].CoordinateId == 0) { return; }
 
             // Work out the current dimension
