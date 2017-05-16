@@ -13,7 +13,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 1000000;
+            var numberOfCoordinates = 100000;
             var arrayOfCoordinates = Utilities.GenerateCoordinates(numberOfCoordinates).ToArray();
             var listOfCoordinateClass = arrayOfCoordinates.Select(a => new CoordinateClass { CoordinateId = a.CoordinateId, Latitude = a.Latitude, Longitude = a.Longitude }).ToList();
             var listOfCoordinates = arrayOfCoordinates.ToList();
@@ -79,7 +79,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch6 = new Stopwatch();
             stopwatch6.Start();
 
-            var neighboringPoints = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).GetNeighborClusters(500, arrayOfCoordinates).ToList();
+            var neighboringPoints = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
 
             stopwatch6.Stop();
 
@@ -92,7 +92,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch7 = new Stopwatch();
             stopwatch7.Start();
 
-            var neighboringPointsRadial = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).GetNeighborClustersRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
+            var neighboringPointsRadial = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
 
             stopwatch7.Stop();
 

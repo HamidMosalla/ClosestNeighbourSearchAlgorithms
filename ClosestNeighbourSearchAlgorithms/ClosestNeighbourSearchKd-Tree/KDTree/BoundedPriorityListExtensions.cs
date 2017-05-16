@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
@@ -35,7 +36,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
         /// <summary>
         /// Takes a <see cref="BoundedPriorityList{TElement,TPriority}"/> storing the indexes of the points and nodes of a KDTree
-        /// and returns the points and nodes.
+        /// and returns the points and nodes and set the used points property to true.
         /// </summary>
         /// <param name="list">The <see cref="BoundedPriorityList{TElement,TPriority}"/>.</param>
         /// <param name="tree">The</param>
@@ -46,21 +47,17 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         public static List<TDimension> ToResultSetRadial<TPriority, TDimension>(this BoundedPriorityList<int, TPriority> list, KDTree<TDimension> tree, int pointsPerCluster)
            where TDimension : IComparable<TDimension>, ICoordinate, new() where TPriority : IComparable<TPriority>
         {
-            var array = new List<TDimension>();
-            for (var i = 0; i < list.Count; i++)
+            if (list.Count < pointsPerCluster) return null;
+
+            var clusterOfCoordinates = new List<TDimension>();
+
+            foreach (int t in list)
             {
-                array.Add(tree.InternalPointArray[list[i]]);
+                clusterOfCoordinates.Add(tree.InternalPointArray[t]);
+                tree.InternalPointArray[t].Used = true;
             }
 
-            if (array.Count == pointsPerCluster)
-            {
-                for (var i = 0; i < list.Count; i++)
-                {
-                    tree.InternalPointArray[list[i]].Used = true;
-                }
-            }
-
-            return array;
+            return clusterOfCoordinates;
         }
     }
 }

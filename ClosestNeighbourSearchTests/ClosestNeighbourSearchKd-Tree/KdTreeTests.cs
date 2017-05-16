@@ -32,7 +32,7 @@ namespace ClosestNeighbourSearchTests
         public void GetNeighborClusters_ReturnTheCorrectNumberOfPoints_GivenANumber()
         {
             var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .NearestNeighborClusterLinear(500, _arrayOfCoordinates)
                 .ToList();
 
             kdTreeNeighboringPoints[0].Count().Should().Be(_pointPerCluster);
@@ -43,7 +43,7 @@ namespace ClosestNeighbourSearchTests
         public void GetNeighborClusters_ReturnTheCorrectType()
         {
             var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .NearestNeighborClusterLinear(500, _arrayOfCoordinates)
                 .ToList();
 
             kdTreeNeighboringPoints.Should().BeOfType<List<List<Coordinate>>>();
@@ -53,7 +53,7 @@ namespace ClosestNeighbourSearchTests
         public void GetNeighborClusters_CalculateDistanceCorrectly()
         {
             var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .NearestNeighborClusterLinear(500, _arrayOfCoordinates)
                 .ToList();
 
             var targetPoint = kdTreeNeighboringPoints[0].First();
@@ -73,7 +73,7 @@ namespace ClosestNeighbourSearchTests
                 .ToList();
 
             var kdTreeNeighboringPoints = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                .GetNeighborClusters(500, _arrayOfCoordinates)
+                .NearestNeighborClusterLinear(500, _arrayOfCoordinates)
                 .ToList();
 
             //Assert

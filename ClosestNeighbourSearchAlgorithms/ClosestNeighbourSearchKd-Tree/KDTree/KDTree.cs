@@ -119,7 +119,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <param name="pointsPerCluster">The number of points per cluster of neighbors.</param>
         /// <param name="coordinates">All the coordinates that will be turned to neighbors</param>
         /// <returns>IEnumerable<List<TDimension>></returns>
-        public IEnumerable<List<TDimension>> GetNeighborClusters(int pointsPerCluster, TDimension[] coordinates)
+        public IEnumerable<List<TDimension>> NearestNeighborClusterLinear(int pointsPerCluster, TDimension[] coordinates)
         {
             var coordinateSet = coordinates.ToHashSet();
 
@@ -141,7 +141,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         /// <param name="pointsPerCluster">The number of points per cluster of neighbors.</param>
         /// <param name="coordinates">All the coordinates that will be turned to neighbors</param>
         /// <returns>IEnumerable<List<TDimension>></returns>
-        public IEnumerable<List<TDimension>> GetNeighborClustersRadial(double radius, int pointsPerCluster, TDimension[] coordinates)
+        public IEnumerable<List<TDimension>> NearestNeighborClusterRadial(double radius, int pointsPerCluster, TDimension[] coordinates)
         {
             var coordinateSet = coordinates.ToHashSet();
             double baseRadius = radius;
@@ -153,7 +153,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
 
                 var closestCoordinates = RadialSearch(center, baseRadius, pointsPerCluster);
 
-                if (closestCoordinates.Count < pointsPerCluster)
+                if (closestCoordinates == null)
                 {
                     radiusGrowthRatio = radiusGrowthRatio * 2;
 
