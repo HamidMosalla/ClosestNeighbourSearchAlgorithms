@@ -67,7 +67,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             {
                 closest = this.MaxPoint;
             }
-            else if (this.MinPoint.Longitude.CompareTo(toPoint.Longitude) < 0)
+            else if (this.MinPoint.Longitude.CompareTo(toPoint.Longitude) > 0)
             {
                 closest = this.MinPoint;
             }
