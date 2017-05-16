@@ -274,7 +274,8 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex];
 
             // Determine which side the target resides in
-            var compare = target.CompareTo(this.InternalTreeOfPoints[nodeIndex]);
+            var compare = dim == 0 ? target.Latitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Latitude)
+                                   : target.Longitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Longitude);
 
             var nearerRect = compare <= 0 ? leftRect : rightRect;
             var furtherRect = compare <= 0 ? rightRect : leftRect;
