@@ -13,7 +13,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 1000000;
+            var numberOfCoordinates = 10000;
             var arrayOfCoordinates = Utilities.GenerateCoordinates(numberOfCoordinates).ToArray();
             var listOfCoordinateClass = arrayOfCoordinates.Select(a => new CoordinateClass { CoordinateId = a.CoordinateId, Latitude = a.Latitude, Longitude = a.Longitude }).ToList();
             var listOfCoordinates = arrayOfCoordinates.ToList();

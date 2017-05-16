@@ -34,8 +34,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                this.minPoint = new TDimension();
-                value = this.minPoint;
+                this.minPoint = value;
             }
         }
 
@@ -53,8 +52,7 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                this.maxPoint = new TDimension();
-                value = this.maxPoint;
+                this.maxPoint = value;
             }
         }
 
@@ -73,9 +71,10 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             rect.MaxPoint = new TDimension();
 
             rect.MinPoint.Latitude = negativeInfinity;
-            rect.MaxPoint.Latitude = positiveInfinity;
             rect.MinPoint.Longitude = negativeInfinity;
-            rect.MaxPoint.Longitude = negativeInfinity;
+
+            rect.MaxPoint.Latitude = positiveInfinity;
+            rect.MaxPoint.Longitude = positiveInfinity;
 
             return rect;
         }
