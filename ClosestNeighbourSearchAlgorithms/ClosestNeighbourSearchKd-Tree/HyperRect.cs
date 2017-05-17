@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
-namespace ClosestNeighbourSearchAlgorithms.KDTree
+namespace ClosestNeighbourSearchAlgorithms
 {
     /// <summary>
     /// Represents a hyper-rectangle. An N-Dimensional rectangle.
@@ -34,17 +34,28 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         {
             var rect = default(HyperRect<TDimension>);
 
-            var minPoint = new TDimension();
-            var maxPoint = new TDimension();
+            //var minPoint = new TDimension();
+            //var maxPoint = new TDimension();
 
-            minPoint.Latitude = negativeInfinity;
-            minPoint.Longitude = negativeInfinity;
+            //minPoint.Latitude = negativeInfinity;
+            //minPoint.Longitude = negativeInfinity;
 
-            maxPoint.Latitude = positiveInfinity;
-            maxPoint.Longitude = positiveInfinity;
+            //maxPoint.Latitude = positiveInfinity;
+            //maxPoint.Longitude = positiveInfinity;
 
-            rect.MinPoint = minPoint;
-            rect.MaxPoint = maxPoint;
+            //rect.MinPoint = minPoint;
+            //rect.MaxPoint = maxPoint;
+
+            //return rect;
+
+            rect.MinPoint = new TDimension();
+            rect.MaxPoint = new TDimension();
+
+            rect.MinPoint.Latitude = negativeInfinity;
+            rect.MinPoint.Longitude = negativeInfinity;
+
+            rect.MaxPoint.Latitude = positiveInfinity;
+            rect.MaxPoint.Longitude = positiveInfinity;
 
             return rect;
         }

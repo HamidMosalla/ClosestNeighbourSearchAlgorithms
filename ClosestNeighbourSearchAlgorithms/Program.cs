@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
-using ClosestNeighbourSearchAlgorithms.KDTree;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
 namespace ClosestNeighbourSearchAlgorithms

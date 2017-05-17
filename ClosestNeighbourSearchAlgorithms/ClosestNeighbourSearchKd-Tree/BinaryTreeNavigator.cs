@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClosestNeighbourSearchAlgorithms.KDTree
+namespace ClosestNeighbourSearchAlgorithms
 {
     /// <summary>
     /// Allows one to navigate a binary tree stored in an <see cref="Array"/> using familiar

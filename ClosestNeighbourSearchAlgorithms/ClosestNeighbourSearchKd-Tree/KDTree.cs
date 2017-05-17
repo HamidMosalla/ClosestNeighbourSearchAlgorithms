@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
-namespace ClosestNeighbourSearchAlgorithms.KDTree
+namespace ClosestNeighbourSearchAlgorithms
 {
     /// <summary>
     /// Represents a KD-Tree. KD-Trees are used for fast spatial searches. Searching in a

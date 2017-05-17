@@ -3,7 +3,6 @@ using System.Linq;
 using ClosestNeighbourSearchAlgorithms;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
-using ClosestNeighbourSearchAlgorithms.KDTree;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 using FluentAssertions;
 using Xunit;

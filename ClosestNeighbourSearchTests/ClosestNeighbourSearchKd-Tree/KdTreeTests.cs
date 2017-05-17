@@ -1,5 +1,4 @@
-﻿using ClosestNeighbourSearchAlgorithms.KDTree;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms;
 using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
-namespace ClosestNeighbourSearchAlgorithms.KDTree
+namespace ClosestNeighbourSearchAlgorithms
 {
     /// <summary>
     /// Contains extension methods for <see cref="BoundedPriorityList{TElement,TPriority}"/> class.

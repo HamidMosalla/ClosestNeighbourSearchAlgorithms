@@ -1,5 +1,4 @@
 ﻿using System;
-using ConsoleSandBox.KDTree;
 
 namespace ClosestNeighbourSearchAlgorithms
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ClosestNeighbourSearchAlgorithms.KDTree;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
 namespace ClosestNeighbourSearchAlgorithms

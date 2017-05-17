@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace ConsoleSandBox.KDTree
+namespace ClosestNeighbourSearchAlgorithms
 {
     /// <summary>
     /// Represents a hyper-rectangle. An N-Dimensional rectangle.
