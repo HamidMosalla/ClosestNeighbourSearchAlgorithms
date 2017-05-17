@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation;
+using ClosestNeighbourSearchAlgorithms.KDTree;
 using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
-namespace ClosestNeighbourSearchAlgorithms.KDTree
+namespace ClosestNeighbourSearchAlgorithms
 {
     public static class Utilities
     {
@@ -78,37 +78,6 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             return data.ToArray();
         }
 
-        public static float[][] GenerateFloats(int points, double range)
-        {
-            var data = new List<float[]>();
-            var random = new Random();
-
-            for (int i = 0; i < points; i++)
-            {
-                data.Add(new float[] { (float)(random.NextDouble() * range), (float)(random.NextDouble() * range) });
-            }
-
-            return data.ToArray();
-        }
-
-        public static float[][] GenerateFloats(int points, double range, int dimensions)
-        {
-            var data = new List<float[]>();
-            var random = new Random();
-
-            for (var i = 0; i < points; i++)
-            {
-                var array = new float[dimensions];
-                for (var j = 0; j < dimensions; j++)
-                {
-                    array[j] = (float)(random.NextDouble() * range);
-                }
-                data.Add(array);
-            }
-
-            return data.ToArray();
-        }
-
         public static IEnumerable<Coordinate> GenerateCoordinates(int numberOfCoordinates)
         {
             var rand = new Random();
@@ -125,6 +94,13 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
                     Longitude = longitude,
                 };
             }
+        }
+
+        public static IEnumerable<Coordinate> GenerateCoordinatesFromArray(double[][] coordinates)
+        {
+            return
+                coordinates.Select(
+                    (x, index) => new Coordinate {CoordinateId = index + 1, Latitude = x[0], Longitude = x[1]});
         }
 
         #endregion

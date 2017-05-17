@@ -34,14 +34,17 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
         {
             var rect = default(HyperRect<TDimension>);
 
-            rect.MinPoint = new TDimension();
-            rect.MaxPoint = new TDimension();
+            var minPoint = new TDimension();
+            var maxPoint = new TDimension();
 
-            rect.MinPoint.Latitude = negativeInfinity;
-            rect.MinPoint.Longitude = negativeInfinity;
+            minPoint.Latitude = negativeInfinity;
+            minPoint.Longitude = negativeInfinity;
 
-            rect.MaxPoint.Latitude = positiveInfinity;
-            rect.MaxPoint.Longitude = positiveInfinity;
+            maxPoint.Latitude = positiveInfinity;
+            maxPoint.Longitude = positiveInfinity;
+
+            rect.MinPoint = minPoint;
+            rect.MaxPoint = maxPoint;
 
             return rect;
         }

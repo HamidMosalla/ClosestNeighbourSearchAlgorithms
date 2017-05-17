@@ -44,13 +44,19 @@
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithDictionary.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithHashSet.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithList.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\BinaryTreeNavigation.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\BinaryTreeNavigator.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\BoundedPriorityList.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\BoundedPriorityListExtensions.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\HyperRect.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\KDTree.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree\Utilities.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BinaryTreeNavigationNodeRemoved.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BinaryTreeNavigatorNodeRemoved.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BoundedPriorityListNodeRemoved.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BoundedPriorityListNodeRemovedExtensions.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\HyperRectNodeRemoved.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\KDTreeNodeRemoved.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\BinaryTreeNavigation.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\BinaryTreeNavigator.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\BoundedPriorityList.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\BoundedPriorityListExtensions.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\HyperRect.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree.cs" />
+    <Compile Include="ClosestNeighbourSearchKd-Tree\Utilities.cs" />
     <Compile Include="ClosestPairOfPointSweepLine\ClosestPairOfPointFinder.cs" />
     <Compile Include="ClosestPairOfPointSweepLine\Coordinate.cs" />
     <Compile Include="ModelsAndContracts\Coordinate.cs" />
@@ -60,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Kd-Tree-Node-Removed.rar" />
     <None Include="Kd-Tree-Untouched.rar" />
   </ItemGroup>
   <ItemGroup>

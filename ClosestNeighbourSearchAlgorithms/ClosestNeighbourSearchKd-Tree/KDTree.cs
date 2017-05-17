@@ -273,9 +273,11 @@ namespace ClosestNeighbourSearchAlgorithms.KDTree
             var rightRect = rect.Clone();
             rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex];
 
+            var compare = target.CompareTo(this.InternalTreeOfPoints[nodeIndex]);
+
             // Determine which side the target resides in
-            var compare = dim == 0 ? target.Latitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Latitude)
-                                   : target.Longitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Longitude);
+            //var compare = dim == 0 ? target.Latitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Latitude)
+            //                       : target.Longitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Longitude);
 
             var nearerRect = compare <= 0 ? leftRect : rightRect;
             var furtherRect = compare <= 0 ? rightRect : leftRect;
