@@ -44,21 +44,25 @@
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithDictionary.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithHashSet.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithList.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BinaryTreeNavigationNodeRemoved.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BinaryTreeNavigatorNodeRemoved.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BoundedPriorityListNodeRemoved.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\BoundedPriorityListNodeRemovedExtensions.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\HyperRectNodeRemoved.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree-Node-Removed\KDTreeNodeRemoved.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\BinaryTreeNavigation.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\BinaryTreeNavigator.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\BoundedPriorityList.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\BoundedPriorityListExtensions.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\HyperRect.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\KDTree.cs" />
-    <Compile Include="ClosestNeighbourSearchKd-Tree\Utilities.cs" />
-    <Compile Include="ClosestPairOfPointSweepLine\ClosestPairOfPointFinder.cs" />
-    <Compile Include="ClosestPairOfPointSweepLine\Coordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigation.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigator.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BoundedPriorityList.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BoundedPriorityListExtensions.cs" />
+    <Compile Include="Kd-Tree-Coordinate\HyperRect.cs" />
+    <Compile Include="Kd-Tree-Coordinate\KDTree.cs" />
+    <Compile Include="Kd-Tree-Coordinate\Utilities.cs" />
+    <Compile Include="Kd-Tree-Node-Removed\BinaryTreeNavigationNodeRemoved.cs" />
+    <Compile Include="Kd-Tree-Node-Removed\BinaryTreeNavigatorNodeRemoved.cs" />
+    <Compile Include="Kd-Tree-Node-Removed\BoundedPriorityListNodeRemoved.cs" />
+    <Compile Include="Kd-Tree-Node-Removed\BoundedPriorityListNodeRemovedExtensions.cs" />
+    <Compile Include="Kd-Tree-Node-Removed\HyperRectNodeRemoved.cs" />
+    <Compile Include="Kd-Tree-Node-Removed\KDTreeNodeRemoved.cs" />
+    <Compile Include="Kd-Tree-Pristine\BinaryTreeNavigationPristine.cs" />
+    <Compile Include="Kd-Tree-Pristine\BinaryTreeNavigatorPristine.cs" />
+    <Compile Include="Kd-Tree-Pristine\BoundedPriorityPristineList.cs" />
+    <Compile Include="Kd-Tree-Pristine\BoundedPriorityListPristineExtensions.cs" />
+    <Compile Include="Kd-Tree-Pristine\HyperRectPristine.cs" />
+    <Compile Include="Kd-Tree-Pristine\KDTreePristine.cs" />
     <Compile Include="ModelsAndContracts\Coordinate.cs" />
     <Compile Include="ModelsAndContracts\ICoordinate.cs" />
     <Compile Include="Program.cs" />
@@ -66,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Kd-Tree-Untouched.rar" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Performance Measurements\Times.txt" />

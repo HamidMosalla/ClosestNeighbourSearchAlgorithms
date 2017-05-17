@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ClosestNeighbourSearchAlgorithms.ClosestPairOfPointSweepLine;
 
 namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation
 {

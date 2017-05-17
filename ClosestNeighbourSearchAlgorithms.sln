@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClosestNeighbourSearchAlgorithms", "ClosestNeighbourSearchAlgorithms\ClosestNeighbourSearchAlgorithms.csproj", "{A0329692-7454-438E-8CF1-66A682699AEB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECE5D216-866D-427F-83B3-9B79E1835529}"
-	ProjectSection(SolutionItems) = preProject
-		ClosestNeighbourSearchAlgorithms\Kd-Tree-Node-Removed.rar = ClosestNeighbourSearchAlgorithms\Kd-Tree-Node-Removed.rar
-		ClosestNeighbourSearchAlgorithms\Kd-Tree-Untouched.rar = ClosestNeighbourSearchAlgorithms\Kd-Tree-Untouched.rar
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClosestNeighbourSearchTests", "ClosestNeighbourSearchTests\ClosestNeighbourSearchTests.csproj", "{0EA5710C-4004-4997-9522-6478CCDF8DF8}"
 EndProject

@@ -1,6 +1,5 @@
 ﻿
 
-using ClosestNeighbourSearchAlgorithms.ClosestPairOfPointSweepLine;
 
 namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce.OldWackyImplementation
 {
