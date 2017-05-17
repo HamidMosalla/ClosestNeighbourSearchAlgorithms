@@ -75,11 +75,11 @@ namespace ClosestNeighbourSearchAlgorithms
             //Console.WriteLine($"PathClusterFinderWith HashSet Took: {elapsedTimeForcoordinateClustersHashSet} Milliseconds");
             //////==========================================================================================
 
-            var rawKdTree = new KDTreeNodeRemoved<double>(2, coordinates, Utilities.L2Norm_Squared_Double);
+            var nearestPointsKdTreeNodeRemoved = new KDTreeNodeRemoved<double>(2, coordinates, Utilities.L2Norm_Squared_Double).RadialSearch(coordinates.First(), 100000, 500);
 
-            var nearestPontsRawKdTree = rawKdTree.RadialSearch(coordinates.First(), 100000, 500);
+            var nearestPointsKdTreePristine = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).RadialSearch(coordinates.First(), 100000, 500);
 
-            var nearestPontsKdTreemeh = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).NearestNeighborsRadial(arrayOfCoordinates.First(), 100000, 500);
+            var nearestPonitsKdTree = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).NearestNeighborsRadial(arrayOfCoordinates.First(), 100000, 500);
 
             //==========================================================================================
             var stopwatch6 = new Stopwatch();

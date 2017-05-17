@@ -57,7 +57,7 @@ namespace ClosestNeighbourSearchAlgorithms
             //rect.MaxPoint.Latitude = positiveInfinity;
             //rect.MaxPoint.Longitude = positiveInfinity;
 
-            return rect;
+            //return rect;
         }
 
         /// <summary>

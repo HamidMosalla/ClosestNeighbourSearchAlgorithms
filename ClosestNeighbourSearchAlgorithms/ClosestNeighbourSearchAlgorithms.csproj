@@ -44,6 +44,7 @@
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithDictionary.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithHashSet.cs" />
     <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithList.cs" />
+    <Compile Include="ModelsAndContracts\CoordinateInfo.cs" />
     <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigation.cs" />
     <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigator.cs" />
     <Compile Include="Kd-Tree-Coordinate\BoundedPriorityList.cs" />
