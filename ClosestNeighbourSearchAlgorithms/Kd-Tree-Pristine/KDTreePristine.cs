@@ -163,13 +163,9 @@ namespace ClosestNeighbourSearchAlgorithms
 
             while (coordinateSet.Any())
             {
-                var seed = coordinateSet.First();
+                var seed = coordinateSet.First().ToDimensionArray<TDimension, TNode>();
 
-                var ar = new[] { seed.Latitude, seed.Longitude };
-                var em = new TDimension[2];
-                ar.CopyTo(em, 0);
-
-                var closestCoordinates = NearestNeighborsLinear(em, pointsPerCluster);
+                var closestCoordinates = NearestNeighborsLinear(seed, pointsPerCluster);
 
                 closestCoordinates.ForEach(c => coordinateSet.Remove(c));
 
@@ -191,13 +187,9 @@ namespace ClosestNeighbourSearchAlgorithms
 
             while (coordinateSet.Any())
             {
-                var center = coordinateSet.First();
+                var center = coordinateSet.First().ToDimensionArray<TDimension, TNode>();
 
-                var ar = new[] { center.Latitude, center.Longitude };
-                var em = new TDimension[2];
-                ar.CopyTo(em, 0);
-
-                var closestCoordinates = NearestNeighborsRadial(em, baseRadius, pointsPerCluster);
+                var closestCoordinates = NearestNeighborsRadial(center, baseRadius, pointsPerCluster);
 
                 if (coordinateSet.Count < pointsPerCluster) closestCoordinates = coordinateSet.ToList();
 
@@ -404,10 +396,9 @@ namespace ClosestNeighbourSearchAlgorithms
 
         private bool NotUsedAlready(TDimension[] internalPoint)
         {
-            //improve this check
             var point = internalPoint as double[];
 
-            return InternalNodeArray.Single(i => i.Latitude == point[0] && i.Longitude == point[1]).Used == false;
+            return point == null ? false : InternalNodeArray.Single(i => i.Latitude == point[0] && i.Longitude == point[1]).Used == false;
         }
     }
 

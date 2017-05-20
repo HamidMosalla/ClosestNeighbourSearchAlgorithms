@@ -99,7 +99,7 @@ namespace ClosestNeighbourSearchAlgorithms
         {
             return
                 coordinates.Select(
-                    (x, index) => new Coordinate {CoordinateId = index + 1, Latitude = x[0], Longitude = x[1]});
+                    (x, index) => new Coordinate { CoordinateId = index + 1, Latitude = x[0], Longitude = x[1] });
         }
 
         #endregion
@@ -195,5 +195,14 @@ namespace ClosestNeighbourSearchAlgorithms
         #endregion
 
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source) => new HashSet<T>(source);
+
+        public static TDimension[] ToDimensionArray<TDimension, TNode>(this TNode node) where TNode : ICoordinate
+        {
+            var temporaryArray = new[] { node.Latitude, node.Longitude };
+            var dimension = new TDimension[2];
+            temporaryArray.CopyTo(dimension, 0);
+
+            return dimension;
+        }
     }
 }
