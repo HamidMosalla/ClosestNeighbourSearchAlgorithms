@@ -51,6 +51,26 @@ namespace ClosestNeighbourSearchTests
         }
 
         [Fact]
+        public void KdTreeWithCoordinate_ReturnsTheSameResultAs_KdTreePristine()
+        {
+            var nearestPontsKdTreeRadial = new KDTree<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            var nearestPointsKdTreePristineRadial = new KDTreePristine<double, Coordinate>(2, _coordinates, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            nearestPontsKdTreeRadial[0].OrderBy(k => k.CoordinateId)
+                                      .SequenceEqual(nearestPointsKdTreePristineRadial[0])
+                                      .Should()
+                                      .BeTrue();
+
+            nearestPontsKdTreeRadial[1].OrderBy(k => k.CoordinateId)
+                                      .SequenceEqual(nearestPointsKdTreePristineRadial[1])
+                                      .Should()
+                                      .BeTrue();
+        }
+
+        [Fact]
         public void KdTreeSearchLinearAndRadia_ShouldNotBeTheSame()
         {
             var nearestPontsKdTreePristineLinear = new KDTreePristine<double, Coordinate>(2, _coordinates, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
