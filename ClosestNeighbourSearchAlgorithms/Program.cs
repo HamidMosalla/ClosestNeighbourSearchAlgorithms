@@ -12,7 +12,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 1000;
+            var numberOfCoordinates = 1000000;
             var coordinates = Utilities.GenerateDoubles(numberOfCoordinates, range: 10000);
             var arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(coordinates).ToArray();
             var listOfCoordinateClass = arrayOfCoordinates.Select(a => new CoordinateClass { CoordinateId = a.CoordinateId, Latitude = a.Latitude, Longitude = a.Longitude }).ToList();
@@ -85,7 +85,7 @@ namespace ClosestNeighbourSearchAlgorithms
 
             //var elapsedTimeForcoordinateClustersKdTreeOneTreeForAll = stopwatch6.ElapsedMilliseconds;
 
-            //Console.WriteLine($"PathClusterFinderWith WithOneKdTree Linear Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeForAll} Milliseconds");
+            //Console.WriteLine($"PathClusterFinderWith KdTree With Coordinate Linear Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeForAll} Milliseconds");
             ////==========================================================================================
 
             ////==========================================================================================
@@ -98,7 +98,7 @@ namespace ClosestNeighbourSearchAlgorithms
 
             //var elapsedTimeForcoordinateClustersKdTreeOneTreeRadialForAll = stopwatch7.ElapsedMilliseconds;
 
-            //Console.WriteLine($"PathClusterFinderWith WithOneKdTree Radial Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeRadialForAll} Milliseconds");
+            //Console.WriteLine($"PathClusterFinderWith KdTree With Coordinate Radial Took: {elapsedTimeForcoordinateClustersKdTreeOneTreeRadialForAll} Milliseconds");
             ////==========================================================================================
 
             ////==========================================================================================
@@ -119,8 +119,8 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch9 = new Stopwatch();
             stopwatch9.Start();
 
-            var nearestPontsKdTreeRadial = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
+            //var nearestPontsKdTreeRadial = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+            //                                                 .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
                                                              .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();

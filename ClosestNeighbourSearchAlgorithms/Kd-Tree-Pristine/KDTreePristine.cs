@@ -388,18 +388,10 @@ namespace ClosestNeighbourSearchAlgorithms
 
             // Try to add the current node to our nearest neighbors list
             distanceSquaredToTarget = this.Metric(this.InternalPointArray[nodeIndex], target);
-            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0 && NotUsedAlready(this.InternalPointArray[nodeIndex]))
+            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0 && this.InternalNodeArray[nodeIndex].Used == false)
             {
                 nearestNeighbors.Add(nodeIndex, distanceSquaredToTarget);
             }
         }
-
-        private bool NotUsedAlready(TDimension[] internalPoint)
-        {
-            var point = internalPoint as double[];
-
-            return point == null ? false : InternalNodeArray.Single(i => i.Latitude == point[0] && i.Longitude == point[1]).Used == false;
-        }
     }
-
 }
