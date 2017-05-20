@@ -75,11 +75,39 @@ namespace ClosestNeighbourSearchAlgorithms
             //Console.WriteLine($"PathClusterFinderWith HashSet Took: {elapsedTimeForcoordinateClustersHashSet} Milliseconds");
             //////==========================================================================================
 
-            var nearestPointsKdTreeNodeRemoved = new KDTreeNodeRemoved<double>(2, coordinates, Utilities.L2Norm_Squared_Double).RadialSearch(coordinates.First(), 100000, 500);
 
-            var nearestPointsKdTreePristine = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).RadialSearch(coordinates.First(), 100000, 500);
 
-            var nearestPonitsKdTree = new KDTree<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate).NearestNeighborsRadial(arrayOfCoordinates.First(), 100000, 500);
+            //==========================================================================================
+            var stopwatch9 = new Stopwatch();
+            stopwatch9.Start();
+
+            var nearestPointsKdTreePristineRadial = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
+            //var nearestPontsKdTreeLinearPristine = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
+            //var nearestPointsKdTreePristineRadial = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).NearestNeighborsRadial(coordinates.First(), 100000, 500).Select(c => c.Item2).ToList();
+
+            stopwatch9.Stop();
+
+            var elapsedTimeKdTreeRadialPristine = stopwatch9.ElapsedMilliseconds;
+
+            Console.WriteLine($"PathClusterFinderWith WithOneKdTree Radial Pristine Took: {elapsedTimeKdTreeRadialPristine} Milliseconds");
+            //==========================================================================================
+
+            //==========================================================================================
+            var stopwatch8 = new Stopwatch();
+            stopwatch8.Start();
+
+            //var nearestPointsKdTreePristineLinear = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).NearestNeighborsLinear(coordinates.First(), 500).Select(c => c.Item2).ToList();
+            var nearestPontsKdTreeLinearPristine = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
+            //var nearestPointsKdTreePristineRadial = new KDTreePristine<double, Coordinate>(2, coordinates, arrayOfCoordinates, Utilities.L2Norm_Squared_Double).NearestNeighborsRadial(coordinates.First(), 100000, 500).Select(c => c.Item2).ToList();
+
+            stopwatch8.Stop();
+
+            var elapsedTimeKdTreeLinearPristine = stopwatch8.ElapsedMilliseconds;
+
+            Console.WriteLine($"PathClusterFinderWith WithOneKdTree Linear Pristine Took: {elapsedTimeKdTreeLinearPristine} Milliseconds");
+            //==========================================================================================
+
 
             //==========================================================================================
             var stopwatch6 = new Stopwatch();

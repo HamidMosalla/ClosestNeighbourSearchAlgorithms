@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
@@ -25,6 +26,7 @@ namespace ClosestNeighbourSearchAlgorithms
     [Serializable]
     public class KDTreePristine<TDimension, TNode>
         where TDimension : IComparable<TDimension>
+        where TNode : ICoordinate
     {
         /// <summary>
         /// The number of points in the KDTree
@@ -122,13 +124,13 @@ namespace ClosestNeighbourSearchAlgorithms
         /// <param name="point">The point whose neighbors we search for.</param>
         /// <param name="neighbors">The number of neighbors to look for.</param>
         /// <returns>The</returns>
-        public Tuple<TDimension[], TNode>[] NearestNeighbors(TDimension[] point, int neighbors)
+        public List<TNode> NearestNeighborsLinear(TDimension[] point, int neighbors)
         {
-            var nearestNeighborList = new BoundedPriorityPristineList<int, double>(neighbors, true);
+            var nearestNeighbors = new BoundedPriorityPristineList<int, double>(neighbors, true);
             var rect = HyperRectPristine<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
-            this.SearchForNearestNeighbors(0, point, rect, 0, nearestNeighborList, double.MaxValue);
+            this.SearchForNearestNeighbors(0, point, rect, 0, nearestNeighbors, double.MaxValue);
 
-            return nearestNeighborList.ToResultSet(this);
+            return nearestNeighbors.ToResultSet(this);
         }
 
         /// <summary>
@@ -138,32 +140,90 @@ namespace ClosestNeighbourSearchAlgorithms
         /// <param name="radius">The radius of the hyper-sphere</param>
         /// <param name="neighboors">The number of neighbors to return.</param>
         /// <returns>The specified number of closest points in the hyper-sphere</returns>
-        public Tuple<TDimension[], TNode>[] RadialSearch(TDimension[] center, double radius, int neighboors = -1)
+        public List<TNode> NearestNeighborsRadial(TDimension[] center, double radius, int neighboors = -1)
         {
-            var nearestNeighbors = new BoundedPriorityPristineList<int, double>(this.Count);
-            if (neighboors == -1)
-            {
-                this.SearchForNearestNeighbors(
-                    0,
-                    center,
-                    HyperRectPristine<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue),
-                    0,
-                    nearestNeighbors,
-                    radius);
-            }
-            else
-            {
-                this.SearchForNearestNeighbors(
-                    0,
-                    center,
-                    HyperRectPristine<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue),
-                    0,
-                    nearestNeighbors,
-                    radius);
-            }
+            var nearestNeighbors = new BoundedPriorityPristineList<int, double>(neighboors == -1 ? this.Count : neighboors, false);
+            var rect = HyperRectPristine<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
+            this.SearchForNearestNeighbors(0, center, rect, 0, nearestNeighbors, radius);
 
-            return nearestNeighbors.ToResultSet(this);
+            return nearestNeighbors.ToResultSetRadial(this, neighboors);
         }
+
+
+
+        /// <summary>
+        /// Finds the nearest neighbors in the <see cref="KDTree{TDimension}"/> and returns them.
+        /// </summary>
+        /// <param name="pointsPerCluster">The number of points per cluster of neighbors.</param>
+        /// <param name="coordinates">All the coordinates that will be turned to neighbors</param>
+        /// <returns>IEnumerable<List<TDimension>></returns>
+        public IEnumerable<List<TNode>> NearestNeighborClusterLinear(int pointsPerCluster, TNode[] coordinates)
+        {
+            var coordinateSet = coordinates.ToHashSet();
+
+            while (coordinateSet.Any())
+            {
+                var seed = coordinateSet.First();
+
+                var ar = new[] { seed.Latitude, seed.Longitude };
+                var em = new TDimension[2];
+                ar.CopyTo(em, 0);
+
+                var closestCoordinates = NearestNeighborsLinear(em, pointsPerCluster);
+
+                closestCoordinates.ForEach(c => coordinateSet.Remove(c));
+
+                yield return closestCoordinates;
+            }
+        }
+
+        /// <summary>
+        /// Finds the nearest neighbors in the <see cref="KDTree{TDimension}"/> and returns them.
+        /// </summary>
+        /// <param name="pointsPerCluster">The number of points per cluster of neighbors.</param>
+        /// <param name="coordinates">All the coordinates that will be turned to neighbors</param>
+        /// <returns>IEnumerable<List<TDimension>></returns>
+        public IEnumerable<List<TNode>> NearestNeighborClusterRadial(double radius, int pointsPerCluster, TNode[] coordinates)
+        {
+            var coordinateSet = coordinates.ToHashSet();
+            double baseRadius = radius;
+            double radiusGrowthRatio = 1;
+
+            while (coordinateSet.Any())
+            {
+                var center = coordinateSet.First();
+
+                var ar = new[] { center.Latitude, center.Longitude };
+                var em = new TDimension[2];
+                ar.CopyTo(em, 0);
+
+                var closestCoordinates = NearestNeighborsRadial(em, baseRadius, pointsPerCluster);
+
+                if (coordinateSet.Count < pointsPerCluster) closestCoordinates = coordinateSet.ToList();
+
+                if (closestCoordinates == null)
+                {
+                    radiusGrowthRatio = radiusGrowthRatio * 2;
+
+                    var nextBaseRadius = baseRadius * radiusGrowthRatio;
+
+                    baseRadius = double.IsInfinity(nextBaseRadius) ? double.MaxValue : nextBaseRadius;
+
+                    continue;
+                }
+
+                baseRadius = radius;
+                radiusGrowthRatio = 1;
+
+                closestCoordinates.ForEach(c => coordinateSet.Remove(c));
+
+                yield return closestCoordinates;
+            }
+        }
+
+
+
+
 
         /// <summary>
         /// Grows a KD tree recursively via median splitting. We find the median by doing a full sort.
@@ -336,10 +396,18 @@ namespace ClosestNeighbourSearchAlgorithms
 
             // Try to add the current node to our nearest neighbors list
             distanceSquaredToTarget = this.Metric(this.InternalPointArray[nodeIndex], target);
-            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0)
+            if (distanceSquaredToTarget.CompareTo(maxSearchRadiusSquared) <= 0 && NotUsedAlready(this.InternalPointArray[nodeIndex]))
             {
                 nearestNeighbors.Add(nodeIndex, distanceSquaredToTarget);
             }
+        }
+
+        private bool NotUsedAlready(TDimension[] internalPoint)
+        {
+            //improve this check
+            var point = internalPoint as double[];
+
+            return InternalNodeArray.Single(i => i.Latitude == point[0] && i.Longitude == point[1]).Used == false;
         }
     }
 

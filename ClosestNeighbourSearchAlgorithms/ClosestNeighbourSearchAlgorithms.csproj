@@ -52,12 +52,6 @@
     <Compile Include="Kd-Tree-Coordinate\HyperRect.cs" />
     <Compile Include="Kd-Tree-Coordinate\KDTree.cs" />
     <Compile Include="Kd-Tree-Coordinate\Utilities.cs" />
-    <Compile Include="Kd-Tree-Node-Removed\BinaryTreeNavigationNodeRemoved.cs" />
-    <Compile Include="Kd-Tree-Node-Removed\BinaryTreeNavigatorNodeRemoved.cs" />
-    <Compile Include="Kd-Tree-Node-Removed\BoundedPriorityListNodeRemoved.cs" />
-    <Compile Include="Kd-Tree-Node-Removed\BoundedPriorityListNodeRemovedExtensions.cs" />
-    <Compile Include="Kd-Tree-Node-Removed\HyperRectNodeRemoved.cs" />
-    <Compile Include="Kd-Tree-Node-Removed\KDTreeNodeRemoved.cs" />
     <Compile Include="Kd-Tree-Pristine\BinaryTreeNavigationPristine.cs" />
     <Compile Include="Kd-Tree-Pristine\BinaryTreeNavigatorPristine.cs" />
     <Compile Include="Kd-Tree-Pristine\BoundedPriorityPristineList.cs" />
