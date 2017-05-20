@@ -14,12 +14,14 @@ namespace ClosestNeighbourSearchTests
         private readonly int _pointPerCluster;
         private readonly Coordinate[] _arrayOfCoordinates;
         private readonly List<CoordinateClass> _listOfCoordinateClass;
+        private double[][] _coordinates;
 
         public KdTreeTests()
         {
             _numberOfCoordinates = 1000;
             _pointPerCluster = 500;
-            _arrayOfCoordinates = Utilities.GenerateCoordinates(_numberOfCoordinates).ToArray();
+            _coordinates = Utilities.GenerateDoubles(_numberOfCoordinates, range: 10000);
+            _arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(_coordinates).ToArray();
             _listOfCoordinateClass = _arrayOfCoordinates.Select(a => new CoordinateClass
             {
                 CoordinateId = a.CoordinateId,
