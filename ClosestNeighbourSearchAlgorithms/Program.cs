@@ -10,7 +10,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 100000;
+            var numberOfCoordinates = 2000000;
             var coordinatesAsDoubleArray = Utilities.GenerateDoubles(numberOfCoordinates, range: 10000);
             var arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(coordinatesAsDoubleArray).ToArray();
             var listOfCoordinates = arrayOfCoordinates.ToList();
@@ -67,7 +67,7 @@ namespace ClosestNeighbourSearchAlgorithms
             stopwatch4.Start();
 
             var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterLinear(500, arrayOfCoordinates);
+                                                             .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
 
             stopwatch4.Stop();
 
