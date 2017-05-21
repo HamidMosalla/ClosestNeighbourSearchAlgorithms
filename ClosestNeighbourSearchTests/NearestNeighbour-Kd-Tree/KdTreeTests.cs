@@ -39,13 +39,13 @@ namespace ClosestNeighbourSearchTests
             var radialSearchWithCoordinateKdTreeRadial = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
 
-            radialSearchWithOriginalKdTreeLinear[0]
-                .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[0])
+            radialSearchWithOriginalKdTreeRadial[0]
+                .SequenceEqual(radialSearchWithCoordinateKdTreeRadial[0])
                 .Should()
                 .BeTrue();
 
-            radialSearchWithOriginalKdTreeLinear[1]
-                .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[1])
+            radialSearchWithOriginalKdTreeRadial[1]
+                .SequenceEqual(radialSearchWithCoordinateKdTreeRadial[1])
                 .Should()
                 .BeTrue();
         }
@@ -156,6 +156,34 @@ namespace ClosestNeighbourSearchTests
                    .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             nearestPontsKdTreePristineLinear.Should().BeOfType<List<List<Coordinate>>>();
+        }
+
+        [Fact]
+        public void GtClosestPointGenerateTheSameResultInBothVersion()
+        {
+            var minPoint = new Coordinate { Latitude = 6544, Longitude = 5577 };
+            var maxPoint = new Coordinate {Latitude = 9687, Longitude = 1254};
+
+            var minPointA = new[] {minPoint.Latitude, minPoint.Longitude};
+            var maxPointA = new[] { maxPoint.Latitude, maxPoint.Longitude};
+
+            var targetPoint = new Coordinate {Latitude = 3322, Longitude = 4562};
+            var targetPointA = new[] { targetPoint.Latitude, targetPoint.Longitude };
+
+            var hyperRect = new HyperRect<double>();
+            hyperRect.MinPoint = minPointA;
+            hyperRect.MaxPoint = maxPointA;
+
+
+            var hyperRectCoordinate = new HyperRectCoordinate<Coordinate>();
+            hyperRectCoordinate.MinPoint = minPoint;
+            hyperRectCoordinate.MaxPoint = maxPoint;
+
+            var rect = hyperRect.GetClosestPoint(targetPointA);
+            var rectCoordinate = hyperRectCoordinate.GetClosestPoint(targetPoint);
+
+            rect[0].Should().Be(rectCoordinate.Latitude);
+            rect[1].Should().Be(rectCoordinate.Longitude);
         }
     }
 }

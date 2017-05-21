@@ -89,11 +89,11 @@ namespace ClosestNeighbourSearchAlgorithms
         /// <returns>The</returns>
         public List<TDimension> NearestNeighborsLinear(TDimension targetPoint, int neighbors)
         {
-            var nearestNeighborList = new BoundedPriorityListCoordinate<int, double>(neighbors, true);
+            var nearestNeighbors = new BoundedPriorityListCoordinate<int, double>(neighbors, true);
             var rect = HyperRectCoordinate<TDimension>.Infinite(this.Dimensions, this.MaxValue, this.MinValue);
-            this.SearchForNearestNeighbors(0, targetPoint, rect, 0, nearestNeighborList, double.MaxValue);
+            this.SearchForNearestNeighbors(0, targetPoint, rect, 0, nearestNeighbors, double.MaxValue);
 
-            return nearestNeighborList.ToResultSet(this);
+            return nearestNeighbors.ToResultSet(this);
         }
 
         /// <summary>

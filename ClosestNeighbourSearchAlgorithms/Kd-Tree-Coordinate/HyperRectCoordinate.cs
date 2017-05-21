@@ -75,19 +75,20 @@ namespace ClosestNeighbourSearchAlgorithms
 
             if (this.MinPoint.Latitude.CompareTo(toPoint.Latitude) > 0)
             {
-                closest = this.MinPoint;
+                closest.Latitude = this.MinPoint.Latitude;
             }
             else if (this.MaxPoint.Latitude.CompareTo(toPoint.Latitude) < 0)
             {
-                closest = this.MaxPoint;
+                closest.Latitude = this.MaxPoint.Latitude;
             }
-            else if (this.MinPoint.Longitude.CompareTo(toPoint.Longitude) > 0)
+
+            if (this.MinPoint.Longitude.CompareTo(toPoint.Longitude) > 0)
             {
-                closest = this.MinPoint;
+                closest.Longitude = this.MinPoint.Longitude;
             }
             else if (this.MaxPoint.Longitude.CompareTo(toPoint.Longitude) < 0)
             {
-                closest = this.MaxPoint;
+                closest.Longitude = this.MaxPoint.Longitude;
             }
             else
             {
