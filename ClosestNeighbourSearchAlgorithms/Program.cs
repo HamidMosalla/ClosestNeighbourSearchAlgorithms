@@ -82,7 +82,7 @@ namespace ClosestNeighbourSearchAlgorithms
             stopwatch5.Start();
 
             var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
+                                                             .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
             stopwatch5.Stop();
 
             var elapsedTimeKdTreeWithCoordinateRadial = stopwatch5.ElapsedMilliseconds;
@@ -111,10 +111,8 @@ namespace ClosestNeighbourSearchAlgorithms
             stopwatch7.Start();
 
             var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
-                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
+                                                             .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
 
-            var nearestPointsKdTreeRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
             stopwatch7.Stop();
 
             var elapsedTimeKdTreeRadialPristine = stopwatch7.ElapsedMilliseconds;
@@ -122,6 +120,5 @@ namespace ClosestNeighbourSearchAlgorithms
             Console.WriteLine($"PathClusterFinder KdTree With Double Array Radial Took: {elapsedTimeKdTreeRadialPristine} Milliseconds");
             //==========================================================================================
         }
-
     }
 }
