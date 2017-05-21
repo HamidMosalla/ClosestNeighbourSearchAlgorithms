@@ -38,6 +38,15 @@
   <ItemGroup>
     <Compile Include="Contracts\Coordinate.cs" />
     <Compile Include="Contracts\ICoordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigationCoordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigatorCoordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BoundedPriorityListCoordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\BoundedPriorityListExtensionsCoordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\HyperRectCoordinate.cs" />
+    <Compile Include="Kd-Tree-Coordinate\KDTreeCoordinate.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithDictionary.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithHashSet.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithList.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\BinaryTreeNavigation.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\BinaryTreeNavigator.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\BoundedPriorityList.cs" />
@@ -45,9 +54,6 @@
     <Compile Include="NearestNeighbour-Kd-Tree\HyperRect.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\KDTree.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\Utilities.cs" />
-    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithDictionary.cs" />
-    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithHashSet.cs" />
-    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,6 +7,7 @@ namespace ClosestNeighbourSearchAlgorithms
 {
     public static class Utilities
     {
+
         #region Metrics
 
         public static Func<double[], double[], double> L2Norm_Squared_Double = (x, y) =>
@@ -22,13 +23,7 @@ namespace ClosestNeighbourSearchAlgorithms
 
         public static Func<Coordinate, Coordinate, double> L2Norm_Squared_Coordinate = (x, y) =>
         {
-            var dx = x.Latitude - y.Latitude;
-            var dy = x.Longitude - y.Longitude;
-
-            var dist = (dx * dx) + (dy * dy);
-            dist = Math.Sqrt(dist);
-
-            return dist;
+            return ((x.Latitude - y.Latitude) * (x.Latitude - y.Latitude)) + ((x.Longitude - y.Longitude) * (x.Longitude - y.Longitude));
         };
 
         #endregion
@@ -183,6 +178,8 @@ namespace ClosestNeighbourSearchAlgorithms
 
         #endregion
 
+        #region DataStructures
+
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source) => new HashSet<T>(source);
 
         public static TDimension[] ToDimensionArray<TDimension, TNode>(this TNode node) where TNode : ICoordinate
@@ -193,5 +190,8 @@ namespace ClosestNeighbourSearchAlgorithms
 
             return dimension;
         }
+
+        #endregion
+
     }
 }

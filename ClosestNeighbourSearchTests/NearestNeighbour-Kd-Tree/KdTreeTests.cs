@@ -12,28 +12,48 @@ namespace ClosestNeighbourSearchTests
         private readonly int _numberOfCoordinates;
         private readonly int _pointPerCluster;
         private readonly Coordinate[] _arrayOfCoordinates;
-        private double[][] _coordinates;
+        private double[][] _coordinatesAsDoubleArray;
         private readonly List<Coordinate> _listOfCoordinates;
 
         public KdTreeTests()
         {
             _numberOfCoordinates = 1000;
             _pointPerCluster = 500;
-            _coordinates = Utilities.GenerateDoubles(_numberOfCoordinates, range: 10000);
-            _arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(_coordinates).ToArray();
+            _coordinatesAsDoubleArray = Utilities.GenerateDoubles(_numberOfCoordinates, range: 10000);
+            _arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(_coordinatesAsDoubleArray).ToArray();
             _listOfCoordinates = _arrayOfCoordinates.ToList();
+        }
+
+        [Fact]
+        public void KdTreeWithCoordinate_ReturnsTheSameResult_AsKdTreeWithArrayOfDoubleAndANodeForCoordinate()
+        {
+            var radialSearchWithOriginalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            var radialSearchWithCoordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            radialSearchWithOriginalKdTree[0]
+                .SequenceEqual(radialSearchWithCoordinateKdTree[0])
+                .Should()
+                .BeTrue();
+
+            radialSearchWithOriginalKdTree[1]
+                .SequenceEqual(radialSearchWithCoordinateKdTree[1])
+                .Should()
+                .BeTrue();
         }
 
         [Fact]
         public void KdTreeSearchLinearAndRadialReturnTheSameSequenceOfElementsResult()
         {
             var nearestPontsKdTreePristineLinear =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates)
                     .ToList();
@@ -55,7 +75,7 @@ namespace ClosestNeighbourSearchTests
             var pathClusterFinderWithListNeighboringPoints = new PathClusterFinderWithList(_listOfCoordinates, _pointPerCluster).GetPointClusters().ToList();
 
             var nearestPointsKdTreeLinear =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(_pointPerCluster, _arrayOfCoordinates)
                     .ToList();
@@ -75,12 +95,12 @@ namespace ClosestNeighbourSearchTests
         public void KdTreeSearchLinearAndRadial_ShouldNotBeTheSame()
         {
             var nearestPontsKdTreePristineLinear =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates)
                     .ToList();
@@ -94,12 +114,12 @@ namespace ClosestNeighbourSearchTests
         public void KdTreeSearchLinearAndRadia_ShouldBeTheSame_IfRadiusOfRadialIsDoubleMax()
         {
             var nearestPontsKdTreePristineLinear =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterRadial(radius: double.MaxValue, pointsPerCluster: 500, coordinates: _arrayOfCoordinates)
                     .ToList();
@@ -113,7 +133,7 @@ namespace ClosestNeighbourSearchTests
         public void GetNeighborClusters_ReturnTheCorrectNumberOfPoints_GivenANumber()
         {
             var nearestPontsKdTreePristineLinear =
-                new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                         Utilities.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
@@ -125,7 +145,7 @@ namespace ClosestNeighbourSearchTests
         public void GetNeighborClusters_ReturnTheCorrectType()
         {
             var nearestPontsKdTreePristineLinear =
-               new KDTree<double, Coordinate>(2, _coordinates, _arrayOfCoordinates,
+               new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
                        Utilities.L2Norm_Squared_Double)
                    .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 

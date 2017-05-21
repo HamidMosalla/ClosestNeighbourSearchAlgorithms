@@ -1,27 +1,40 @@
 ﻿For 1,000 Points:
-PathClusterFinder BruteForce List Took: 77 Milliseconds
-PathClusterFinder BruteForce Dictionary Took: 38 Milliseconds
+PathClusterFinder BruteForce List Took: 78 Milliseconds
+PathClusterFinder BruteForce Dictionary Took: 42 Milliseconds
 PathClusterFinder BruteForce HashSet Took: 11 Milliseconds
-PathClusterFinder KdTree Linear Took: 25 Milliseconds
-PathClusterFinder KdTree Radial Took: 12 Milliseconds
+PathClusterFinder KdTree With Coordinate Linear Took: 9 Milliseconds
+PathClusterFinder KdTree With Coordinate Radial Took: 14 Milliseconds
+PathClusterFinder KdTree With Double Array Linear Took: 24 Milliseconds
+PathClusterFinder KdTree With Double Array Radial Took: 18 Milliseconds
 ========================================================================================
 For 10,000 Points:
-PathClusterFinder BruteForce List Took: 3044 Milliseconds
-PathClusterFinder BruteForce Dictionary Took: 90 Milliseconds
-PathClusterFinder BruteForce HashSet Took: 54 Milliseconds
-PathClusterFinder KdTree Linear Took: 147 Milliseconds
-PathClusterFinder KdTree Radial Took: 151 Milliseconds
+PathClusterFinder BruteForce List Took: 2917 Milliseconds
+PathClusterFinder BruteForce Dictionary Took: 96 Milliseconds
+PathClusterFinder BruteForce HashSet Took: 51 Milliseconds
+PathClusterFinder KdTree With Coordinate Linear Took: 42 Milliseconds
+PathClusterFinder KdTree With Coordinate Radial Took: 90 Milliseconds
+PathClusterFinder KdTree With Double Array Linear Took: 134 Milliseconds
+PathClusterFinder KdTree With Double Array Radial Took: 213 Milliseconds
 =========================================================================================
 For 100,000 Points:
-PathClusterFinder BruteForce List Took: 304184 Milliseconds
-PathClusterFinder BruteForce Dictionary Took: 4109 Milliseconds
-PathClusterFinder BruteForce HashSet Took: 3075 Milliseconds
-PathClusterFinder KdTree Linear Took: 1765 Milliseconds
-PathClusterFinder KdTree Radial Took: 1830 Milliseconds
+PathClusterFinder BruteForce List Took: 290455 Milliseconds
+PathClusterFinder BruteForce Dictionary Took: 3846 Milliseconds
+PathClusterFinder BruteForce HashSet Took: 2691 Milliseconds
+PathClusterFinder KdTree With Coordinate Linear Took: 506 Milliseconds
+PathClusterFinder KdTree With Coordinate Radial Took: 1076 Milliseconds
+PathClusterFinder KdTree With Double Array Linear Took: 1667 Milliseconds
+PathClusterFinder KdTree With Double Array Radial Took: 2830 Milliseconds
 =========================================================================================
 For 1,000,000 Points:
-PathClusterFinderWith Dictionary Took: 441107 Milliseconds
-PathClusterFinderWith HashSet Took: 341262 Milliseconds
-PathClusterFinderWith WithOneKdTree Linear Took: 25306 Milliseconds
+PathClusterFinder KdTree With Coordinate Linear Took: 7537 Milliseconds
+PathClusterFinder KdTree With Coordinate Radial Took: 15755 Milliseconds
+PathClusterFinder KdTree With Double Array Linear Took: 25546 Milliseconds
+PathClusterFinder KdTree With Double Array Radial Took: 43086 Milliseconds
+=========================================================================================
+For 2,000,000 Points:
+PathClusterFinder KdTree With Coordinate Linear Took: 17287 Milliseconds
+PathClusterFinder KdTree With Coordinate Radial Took: 36619 Milliseconds
+PathClusterFinder KdTree With Double Array Linear Took: 57614 Milliseconds
+PathClusterFinder KdTree With Double Array Radial Took: 95351 Milliseconds
 
-Note: brute force algorithms practically incapable of operating if the number of points are high.
+Note: brute force algorithms practically unusable if the number of points are high.
