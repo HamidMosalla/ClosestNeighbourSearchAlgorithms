@@ -27,19 +27,25 @@ namespace ClosestNeighbourSearchTests
         [Fact]
         public void KdTreeWithCoordinate_ReturnsTheSameResult_AsKdTreeWithArrayOfDouble()
         {
-            var radialSearchWithOriginalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
-                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+            var radialSearchWithOriginalKdTreeLinear = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+                                                             .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
-            var radialSearchWithCoordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+            var radialSearchWithCoordinateKdTreeLinear = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                                                             .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
-            radialSearchWithOriginalKdTree[0]
-                .SequenceEqual(radialSearchWithCoordinateKdTree[0])
+            var radialSearchWithOriginalKdTreeRadial = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+                                                             .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            var radialSearchWithCoordinateKdTreeRadial = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+                                                             .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            radialSearchWithOriginalKdTreeLinear[0]
+                .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[0])
                 .Should()
                 .BeTrue();
 
-            radialSearchWithOriginalKdTree[1]
-                .SequenceEqual(radialSearchWithCoordinateKdTree[1])
+            radialSearchWithOriginalKdTreeLinear[1]
+                .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[1])
                 .Should()
                 .BeTrue();
         }
