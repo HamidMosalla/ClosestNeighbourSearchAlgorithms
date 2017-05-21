@@ -1,4 +1,4 @@
-﻿namespace ClosestNeighbourSearchAlgorithms.ModelsAndContracts
+﻿namespace ClosestNeighbourSearchAlgorithms.Contracts
 {
     public interface ICoordinate
     {

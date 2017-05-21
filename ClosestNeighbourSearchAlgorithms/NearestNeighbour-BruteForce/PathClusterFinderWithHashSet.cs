@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
+using ClosestNeighbourSearchAlgorithms.Contracts;
 
-namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce
+namespace ClosestNeighbourSearchAlgorithms
 {
-    public class PathClusterFinderWithList
+    public class PathClusterFinderWithHashSet
     {
-        private readonly List<Coordinate> _coordinates;
+        private readonly HashSet<Coordinate> _coordinates;
         private readonly int _pointsPerCluster;
 
-        public PathClusterFinderWithList(List<Coordinate> coordinates, int pointsPerCluster)
+        public PathClusterFinderWithHashSet(HashSet<Coordinate> coordinates, int pointsPerCluster)
         {
             _coordinates = coordinates;
             _pointsPerCluster = pointsPerCluster;
         }
 
-        public IEnumerable<List<Coordinate>> GetPointClusters()
+        public IEnumerable<Dictionary<long, Coordinate>> GetPointClusters()
         {
             while (_coordinates.Any())
             {
@@ -27,11 +27,11 @@ namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce
                                                      .Where(c => !Equals(c, seed))
                                                      .OrderBy(c => seed.Distance(c))
                                                      .Take(_pointsPerCluster - seedItself)
-                                                     .ToList();
+                                                     .ToDictionary(c => c.CoordinateId, c => c);
 
-                closestCoordinates.Add(seed);
+                closestCoordinates.Add(seed.CoordinateId, seed);
 
-                closestCoordinates.ForEach(c => _coordinates.Remove(c));
+                closestCoordinates.ToList().ForEach(c => _coordinates.Remove(c.Value));
 
                 yield return closestCoordinates;
             }

@@ -7,7 +7,7 @@ namespace ClosestNeighbourSearchAlgorithms
     /// Represents a hyper-rectangle. An N-Dimensional rectangle.
     /// </summary>
     /// <typeparam name="T">The type of "dimension" in the metric space in which the hyper-rectangle lives.</typeparam>
-    public struct HyperRectPristine<T>
+    public struct HyperRect<T>
         where T : IComparable<T>
     {
         /// <summary>
@@ -65,9 +65,9 @@ namespace ClosestNeighbourSearchAlgorithms
         /// <param name="positiveInfinity">The smallest possible values in any given dimension.</param>
         /// <param name="negativeInfinity">The largest possible values in any given dimension.</param>
         /// <returns>The hyper-rectangle which spans the entire metric space.</returns>
-        public static HyperRectPristine<T> Infinite(int dimensions, T positiveInfinity, T negativeInfinity)
+        public static HyperRect<T> Infinite(int dimensions, T positiveInfinity, T negativeInfinity)
         {
-            var rect = default(HyperRectPristine<T>);
+            var rect = default(HyperRect<T>);
 
             rect.MinPoint = new T[dimensions];
             rect.MaxPoint = new T[dimensions];
@@ -115,14 +115,14 @@ namespace ClosestNeighbourSearchAlgorithms
         }
 
         /// <summary>
-        /// Clones the <see cref="HyperRectPristine{T}"/>.
+        /// Clones the <see cref="HyperRect{T}"/>.
         /// </summary>
-        /// <returns>A clone of the <see cref="HyperRectPristine{T}"/></returns>
-        public HyperRectPristine<T> Clone()
+        /// <returns>A clone of the <see cref="HyperRect{T}"/></returns>
+        public HyperRect<T> Clone()
         {
             // For a discussion of why we don't implement ICloneable
             // see http://stackoverflow.com/questions/536349/why-no-icloneablet
-            var rect = default(HyperRectPristine<T>);
+            var rect = default(HyperRect<T>);
             rect.MinPoint = this.MinPoint;
             rect.MaxPoint = this.MaxPoint;
             return rect;

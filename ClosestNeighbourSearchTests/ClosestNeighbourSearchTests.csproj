@@ -63,9 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Kd-Tree-Coordinate\KdTreeTests.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithListTests.cs" />
-    <Compile Include="Kd-Tree-Pristine\KdTreePristineTests.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithListTests.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\KdTreeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

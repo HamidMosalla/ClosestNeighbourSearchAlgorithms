@@ -5,7 +5,7 @@ namespace ClosestNeighbourSearchAlgorithms
     /// <summary>
     /// Contains methods used for doing index arithmetic to traverse nodes in a binary tree.
     /// </summary>
-    public static class BinaryTreeNavigationPristine
+    public static class BinaryTreeNavigation
     {
         /// <summary>
         /// Computes the index of the right child of the current node-index.

@@ -11,7 +11,8 @@ namespace ClosestNeighbourSearchAlgorithms
     /// </summary>
     /// <typeparam name="TElement">The type of element the list maintains.</typeparam>
     /// <typeparam name="TPriority">The type the elements are prioritized by.</typeparam>
-    public class BoundedPriorityList<TElement, TPriority> : IEnumerable<TElement> where TPriority : IComparable<TPriority>
+    public class BoundedPriorityList<TElement, TPriority> : IEnumerable<TElement>
+        where TPriority : IComparable<TPriority>
     {
         /// <summary>
         /// The list holding the actual elements
@@ -68,7 +69,7 @@ namespace ClosestNeighbourSearchAlgorithms
         public TElement this[int index] => this.elementList[index];
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BoundedPriorityList{TElement, TPriority}"/> class.
+        /// Initializes a new instance of the <see cref="BoundedPriorityList{TElement,TPriority}"/> class.
         /// Note: You should not have <paramref name="allocate"/> set to true, and the capacity set to a very large number.
         /// Especially if you will be creating and destroying many <see cref="BoundedPriorityList{TElement,TPriority}"/> very rapidly.
         /// If you ignore this advice you will create lots of memory pressure. If you don't understand why this is a problem you should

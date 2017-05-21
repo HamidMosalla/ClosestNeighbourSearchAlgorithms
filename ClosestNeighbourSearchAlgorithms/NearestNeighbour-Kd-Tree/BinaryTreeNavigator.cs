@@ -8,7 +8,7 @@ namespace ClosestNeighbourSearchAlgorithms
     /// </summary>
     /// <typeparam name="TPoint">The type of the individual points.</typeparam>
     /// <typeparam name="TNode">The type of the individual nodes.</typeparam>
-    public class BinaryTreeNavigatorPristine<TPoint, TNode>
+    public class BinaryTreeNavigator<TPoint, TNode>
     {
         /// <summary>
         /// A reference to the pointArray in which the binary tree is stored in.
@@ -25,25 +25,25 @@ namespace ClosestNeighbourSearchAlgorithms
         /// <summary>
         /// The left child of the current node.
         /// </summary>
-        public BinaryTreeNavigatorPristine<TPoint, TNode> Left
+        public BinaryTreeNavigator<TPoint, TNode> Left
             =>
-                BinaryTreeNavigationPristine.LeftChildIndex(this.Index) < this.pointArray.Length - 1
-                    ? new BinaryTreeNavigatorPristine<TPoint, TNode>(this.pointArray, this.nodeArray, BinaryTreeNavigationPristine.LeftChildIndex(this.Index))
+                BinaryTreeNavigation.LeftChildIndex(this.Index) < this.pointArray.Length - 1
+                    ? new BinaryTreeNavigator<TPoint, TNode>(this.pointArray, this.nodeArray, BinaryTreeNavigation.LeftChildIndex(this.Index))
                     : null;
 
         /// <summary>
         /// The right child of the current node.
         /// </summary>
-        public BinaryTreeNavigatorPristine<TPoint, TNode> Right
+        public BinaryTreeNavigator<TPoint, TNode> Right
                =>
-                   BinaryTreeNavigationPristine.RightChildIndex(this.Index) < this.pointArray.Length - 1
-                       ? new BinaryTreeNavigatorPristine<TPoint, TNode>(this.pointArray, this.nodeArray, BinaryTreeNavigationPristine.RightChildIndex(this.Index))
+                   BinaryTreeNavigation.RightChildIndex(this.Index) < this.pointArray.Length - 1
+                       ? new BinaryTreeNavigator<TPoint, TNode>(this.pointArray, this.nodeArray, BinaryTreeNavigation.RightChildIndex(this.Index))
                        : null;
 
         /// <summary>
         /// The parent of the current node.
         /// </summary>
-        public BinaryTreeNavigatorPristine<TPoint, TNode> Parent => this.Index == 0 ? null : new BinaryTreeNavigatorPristine<TPoint, TNode>(this.pointArray, this.nodeArray, BinaryTreeNavigationPristine.ParentIndex(this.Index));
+        public BinaryTreeNavigator<TPoint, TNode> Parent => this.Index == 0 ? null : new BinaryTreeNavigator<TPoint, TNode>(this.pointArray, this.nodeArray, BinaryTreeNavigation.ParentIndex(this.Index));
 
         /// <summary>
         /// The current <typeparamref name="TPoint"/>.
@@ -56,12 +56,12 @@ namespace ClosestNeighbourSearchAlgorithms
         public TNode Node => this.nodeArray[this.Index];
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryTreeNavigatorPristine{TPoint,TNode}"/> class.
+        /// Initializes a new instance of the <see cref="BinaryTreeNavigator{TPoint,TNode}"/> class.
         /// </summary>
         /// <param name="pointArray">The point array backing the binary tree.</param>
         /// <param name="nodeArray">The node array corresponding to the point array.</param>
         /// <param name="index">The index of the node of interest in the pointArray. If not given, the node navigator start at the 0 index (the root of the tree).</param>
-        public BinaryTreeNavigatorPristine(TPoint[] pointArray, TNode[] nodeArray, int index = 0)
+        public BinaryTreeNavigator(TPoint[] pointArray, TNode[] nodeArray, int index = 0)
         {
             this.Index = index;
             this.pointArray = pointArray;

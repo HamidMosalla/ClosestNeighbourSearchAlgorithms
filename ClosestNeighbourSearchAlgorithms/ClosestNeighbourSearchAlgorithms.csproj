@@ -36,30 +36,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\AllPointDistance.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\CoordinateClass.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\PathClusterFinder.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\PointCluster.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\OldWackyImplementation\PointDistance.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithDictionary.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithHashSet.cs" />
-    <Compile Include="ClosestNeighbourSearchBruteForce\PathClusterFinderWithList.cs" />
-    <Compile Include="ModelsAndContracts\CoordinateInfo.cs" />
-    <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigation.cs" />
-    <Compile Include="Kd-Tree-Coordinate\BinaryTreeNavigator.cs" />
-    <Compile Include="Kd-Tree-Coordinate\BoundedPriorityList.cs" />
-    <Compile Include="Kd-Tree-Coordinate\BoundedPriorityListExtensions.cs" />
-    <Compile Include="Kd-Tree-Coordinate\HyperRect.cs" />
-    <Compile Include="Kd-Tree-Coordinate\KDTree.cs" />
-    <Compile Include="Kd-Tree-Coordinate\Utilities.cs" />
-    <Compile Include="Kd-Tree-Pristine\BinaryTreeNavigationPristine.cs" />
-    <Compile Include="Kd-Tree-Pristine\BinaryTreeNavigatorPristine.cs" />
-    <Compile Include="Kd-Tree-Pristine\BoundedPriorityPristineList.cs" />
-    <Compile Include="Kd-Tree-Pristine\BoundedPriorityListPristineExtensions.cs" />
-    <Compile Include="Kd-Tree-Pristine\HyperRectPristine.cs" />
-    <Compile Include="Kd-Tree-Pristine\KDTreePristine.cs" />
-    <Compile Include="ModelsAndContracts\Coordinate.cs" />
-    <Compile Include="ModelsAndContracts\ICoordinate.cs" />
+    <Compile Include="Contracts\Coordinate.cs" />
+    <Compile Include="Contracts\ICoordinate.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\BinaryTreeNavigation.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\BinaryTreeNavigator.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\BoundedPriorityList.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\BoundedPriorityListExtensions.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\HyperRect.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\KDTree.cs" />
+    <Compile Include="NearestNeighbour-Kd-Tree\Utilities.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithDictionary.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithHashSet.cs" />
+    <Compile Include="NearestNeighbour-BruteForce\PathClusterFinderWithList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

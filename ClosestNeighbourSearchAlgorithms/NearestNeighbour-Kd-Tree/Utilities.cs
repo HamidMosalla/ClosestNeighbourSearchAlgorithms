@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
+using ClosestNeighbourSearchAlgorithms.Contracts;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
     public static class Utilities
     {
         #region Metrics
-
-        public static Func<float[], float[], double> L2Norm_Squared_Float = (x, y) =>
-        {
-            float dist = 0f;
-            for (int i = 0; i < x.Length; i++)
-            {
-                dist += (x[i] - y[i]) * (x[i] - y[i]);
-            }
-
-            return dist;
-        };
 
         public static Func<double[], double[], double> L2Norm_Squared_Double = (x, y) =>
         {

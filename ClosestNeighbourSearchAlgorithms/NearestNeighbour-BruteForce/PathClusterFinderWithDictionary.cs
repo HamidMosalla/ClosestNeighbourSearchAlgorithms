@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ClosestNeighbourSearchAlgorithms.ModelsAndContracts;
+using ClosestNeighbourSearchAlgorithms.Contracts;
 
-namespace ClosestNeighbourSearchAlgorithms.ClosestNeighbourSearchBruteForce
+namespace ClosestNeighbourSearchAlgorithms
 {
     public class PathClusterFinderWithDictionary
     {
