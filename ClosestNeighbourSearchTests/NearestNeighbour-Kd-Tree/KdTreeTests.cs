@@ -27,15 +27,10 @@ namespace ClosestNeighbourSearchTests
         [Fact]
         public void KdTreeWithCoordinate_ReturnsTheSameResult_AsKdTreeWithArrayOfDouble()
         {
-            var radialSearchWithOriginalKdTreeLinear = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+            var linearSearchWithOriginalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
                                                              .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
-            //foreach (var arrayOfCoordinate in _arrayOfCoordinates)
-            //{
-            //    arrayOfCoordinate.Used = false;
-            //}
-
-            var radialSearchWithCoordinateKdTreeLinear = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+            var linearSearchWithCoordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             //var radialSearchWithOriginalKdTreeRadial = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
@@ -44,15 +39,53 @@ namespace ClosestNeighbourSearchTests
             //var radialSearchWithCoordinateKdTreeRadial = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
             //                                                 .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
 
-            radialSearchWithOriginalKdTreeLinear[0].OrderBy(e=>e.CoordinateId)
-                .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[0].OrderBy(e => e.CoordinateId))
-                .Should()
-                .BeTrue();
 
-            radialSearchWithOriginalKdTreeLinear[1].OrderBy(e => e.CoordinateId)
-                .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[1].OrderBy(e => e.CoordinateId))
-                .Should()
-                .BeTrue();
+
+            for (int i = 0; i < 300; i++)
+            {
+                linearSearchWithOriginalKdTree[0][i].CoordinateId.Should().Be(linearSearchWithCoordinateKdTree[0][i].CoordinateId);
+            }
+
+
+            //radialSearchWithOriginalKdTreeLinear[0].OrderBy(e=>e.CoordinateId)
+            //    .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[0].OrderBy(e => e.CoordinateId))
+            //    .Should()
+            //    .BeTrue();
+
+            //radialSearchWithOriginalKdTreeLinear[1].OrderBy(e => e.CoordinateId)
+            //    .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[1].OrderBy(e => e.CoordinateId))
+            //    .Should()
+            //    .BeTrue();
+        }
+
+        [Fact]
+        public void BothVersionOfKdTreeGenerateTheSameTreeStructure()
+        {
+            var originalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double);
+
+            var coordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate);
+
+            for (int i = 0; i < _numberOfCoordinates; i++)
+            {
+                if (coordinateKdTree.InternalTreeOfPoints[i].CoordinateId != 0)
+                    originalKdTree.InternalPointArray[i][0].Should().Be(coordinateKdTree.InternalTreeOfPoints[i].Latitude);
+            }
+        }
+
+        [Fact]
+        public void BothVersionOfKdTree_ReturnsTheSameSetOfCoordinates_GivenASetOfPoints()
+        {
+            var pointsNeeded = 100;
+
+            var originalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double);
+
+            var coordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate);
+
+            var pointsFromOriginal = originalKdTree.NearestNeighborsLinear(_coordinatesAsDoubleArray.First(), pointsNeeded);
+
+            var pointsFromModified = coordinateKdTree.NearestNeighborsLinear(_arrayOfCoordinates.First(), pointsNeeded);
+
+            pointsFromOriginal.SequenceEqual(pointsFromModified).Should().BeTrue();
         }
 
         [Fact]
@@ -167,12 +200,12 @@ namespace ClosestNeighbourSearchTests
         public void GtClosestPointGenerateTheSameResultInBothVersion()
         {
             var minPoint = new Coordinate { Latitude = 6544, Longitude = 5577 };
-            var maxPoint = new Coordinate {Latitude = 9687, Longitude = 1254};
+            var maxPoint = new Coordinate { Latitude = 9687, Longitude = 1254 };
 
-            var minPointA = new[] {minPoint.Latitude, minPoint.Longitude};
-            var maxPointA = new[] { maxPoint.Latitude, maxPoint.Longitude};
+            var minPointA = new[] { minPoint.Latitude, minPoint.Longitude };
+            var maxPointA = new[] { maxPoint.Latitude, maxPoint.Longitude };
 
-            var targetPoint = new Coordinate {Latitude = 3322, Longitude = 4562};
+            var targetPoint = new Coordinate { Latitude = 3322, Longitude = 4562 };
             var targetPointA = new[] { targetPoint.Latitude, targetPoint.Longitude };
 
             var hyperRect = new HyperRect<double>();
@@ -189,6 +222,21 @@ namespace ClosestNeighbourSearchTests
 
             rect[0].Should().Be(rectCoordinate.Latitude);
             rect[1].Should().Be(rectCoordinate.Longitude);
+        }
+
+        [Fact]
+        public void SquareOfDistanceWorksCorrectlyInBothVersionOfKdTree()
+        {
+            var minPoint = new Coordinate { Latitude = 6544, Longitude = 5577 };
+            var maxPoint = new Coordinate { Latitude = 9687, Longitude = 1254 };
+
+            var minPointA = new[] { minPoint.Latitude, minPoint.Longitude };
+            var maxPointA = new[] { maxPoint.Latitude, maxPoint.Longitude };
+
+            var coordinateDistance = Utilities.L2Norm_Squared_Coordinate(minPoint, maxPoint);
+            var doubleArrayDistance = Utilities.L2Norm_Squared_Double(minPointA, maxPointA);
+
+            coordinateDistance.Should().Be(doubleArrayDistance);
         }
     }
 }

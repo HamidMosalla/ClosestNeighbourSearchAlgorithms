@@ -273,6 +273,18 @@ namespace ClosestNeighbourSearchAlgorithms
             var rightRect = rectCoordinate.Clone();
             rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex];
 
+            //if (dim == 0)
+            //{
+            //    leftRect.MaxPoint.Latitude = this.InternalTreeOfPoints[nodeIndex].Latitude;
+            //    rightRect.MinPoint.Latitude = this.InternalTreeOfPoints[nodeIndex].Latitude;
+            //}
+
+            //if (dim == 1)
+            //{
+            //    leftRect.MaxPoint.Longitude = this.InternalTreeOfPoints[nodeIndex].Longitude;
+            //    rightRect.MinPoint.Longitude = this.InternalTreeOfPoints[nodeIndex].Longitude;
+            //}
+
             // Determine which side the target resides in
             var compare = dim == 0 ? target.Latitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Latitude)
                                    : target.Longitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Longitude);
