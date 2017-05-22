@@ -1,4 +1,4 @@
-﻿namespace ClosestNeighbourSearchAlgorithms.Contracts
+﻿namespace ClosestNeighbourSearchAlgorithms.Models
 {
     public struct Radius
     {

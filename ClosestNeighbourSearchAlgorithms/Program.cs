@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.Contracts;
+using ClosestNeighbourSearchAlgorithms.Models;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
@@ -10,7 +11,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 10000;
+            var numberOfCoordinates = 1000000;
             var coordinatesAsDoubleArray = Utilities.GenerateDoubles(numberOfCoordinates, range: 10000);
             var arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(coordinatesAsDoubleArray).ToArray();
             var listOfCoordinates = arrayOfCoordinates.ToList();

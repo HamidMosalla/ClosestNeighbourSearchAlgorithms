@@ -2,6 +2,7 @@
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms;
 using ClosestNeighbourSearchAlgorithms.Contracts;
+using ClosestNeighbourSearchAlgorithms.Models;
 using FluentAssertions;
 using Xunit;
 

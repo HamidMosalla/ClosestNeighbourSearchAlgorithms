@@ -1,6 +1,7 @@
 ﻿using System;
+using ClosestNeighbourSearchAlgorithms.Contracts;
 
-namespace ClosestNeighbourSearchAlgorithms.Contracts
+namespace ClosestNeighbourSearchAlgorithms.Models
 {
     public struct Coordinate : IComparable<Coordinate>, ICoordinate
     {
