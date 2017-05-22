@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using ClosestNeighbourSearchAlgorithms.Contracts;
 using ClosestNeighbourSearchAlgorithms.Models;
+using ClosestNeighbourSearchAlgorithms.Utilities;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
@@ -12,8 +13,8 @@ namespace ClosestNeighbourSearchAlgorithms
         public static void Main(string[] args)
         {
             var numberOfCoordinates = 1000000;
-            var coordinatesAsDoubleArray = Utilities.GenerateDoubles(numberOfCoordinates, range: 10000);
-            var arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(coordinatesAsDoubleArray).ToArray();
+            var coordinatesAsDoubleArray = Utilities.KdTreeHelper.GenerateDoubles(numberOfCoordinates, range: 10000);
+            var arrayOfCoordinates = Utilities.KdTreeHelper.GenerateCoordinatesFromArray(coordinatesAsDoubleArray).ToArray();
             var listOfCoordinates = arrayOfCoordinates.ToList();
             var dictionaryOfCoordinates = arrayOfCoordinates.ToDictionary(c => c.CoordinateId, c => c);
             var hashSetOfCoordinates = arrayOfCoordinates.ToHashSet();
@@ -67,7 +68,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch4 = new Stopwatch();
             stopwatch4.Start();
 
-            var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+            var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
 
             stopwatch4.Stop();
@@ -82,7 +83,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch5 = new Stopwatch();
             stopwatch5.Start();
 
-            var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+            var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
             stopwatch5.Stop();
 
@@ -96,7 +97,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch6 = new Stopwatch();
             stopwatch6.Start();
 
-            var nearestPontsKdTreeLinearPristine = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+            var nearestPontsKdTreeLinearPristine = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Double)
                                                             .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
 
             stopwatch6.Stop();
@@ -111,7 +112,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch7 = new Stopwatch();
             stopwatch7.Start();
 
-            var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+            var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Double)
                                                              .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
 
             stopwatch7.Stop();

@@ -54,7 +54,7 @@
     <Compile Include="NearestNeighbour-Kd-Tree\BoundedPriorityListExtensions.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\HyperRect.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree\KDTree.cs" />
-    <Compile Include="NearestNeighbour-Kd-Tree\Utilities.cs" />
+    <Compile Include="Utilities\KdTreeHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

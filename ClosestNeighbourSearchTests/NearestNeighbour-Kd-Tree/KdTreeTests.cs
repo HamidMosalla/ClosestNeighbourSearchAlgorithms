@@ -3,6 +3,7 @@ using System.Linq;
 using ClosestNeighbourSearchAlgorithms;
 using ClosestNeighbourSearchAlgorithms.Contracts;
 using ClosestNeighbourSearchAlgorithms.Models;
+using ClosestNeighbourSearchAlgorithms.Utilities;
 using Xunit;
 using FluentAssertions;
 
@@ -20,18 +21,18 @@ namespace ClosestNeighbourSearchTests
         {
             _numberOfCoordinates = 1000;
             _pointPerCluster = 500;
-            _coordinatesAsDoubleArray = Utilities.GenerateDoubles(_numberOfCoordinates, range: 10000);
-            _arrayOfCoordinates = Utilities.GenerateCoordinatesFromArray(_coordinatesAsDoubleArray).ToArray();
+            _coordinatesAsDoubleArray = KdTreeHelper.GenerateDoubles(_numberOfCoordinates, range: 10000);
+            _arrayOfCoordinates = KdTreeHelper.GenerateCoordinatesFromArray(_coordinatesAsDoubleArray).ToArray();
             _listOfCoordinates = _arrayOfCoordinates.ToList();
         }
 
         [Fact]
         public void KdTreeWithCoordinate_ReturnsTheSameResult_AsKdTreeWithArrayOfDouble()
         {
-            var linearSearchWithOriginalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
+            var linearSearchWithOriginalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double)
                                                              .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
-            var linearSearchWithCoordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
+            var linearSearchWithCoordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             //var radialSearchWithOriginalKdTreeRadial = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
@@ -62,9 +63,9 @@ namespace ClosestNeighbourSearchTests
         [Fact]
         public void BothVersionOfKdTreeGenerateTheSameTreeStructure()
         {
-            var originalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double);
+            var originalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double);
 
-            var coordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate);
+            var coordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate);
 
             for (int i = 0; i < _numberOfCoordinates; i++)
             {
@@ -78,9 +79,9 @@ namespace ClosestNeighbourSearchTests
         {
             var pointsNeeded = 100;
 
-            var originalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double);
+            var originalKdTree = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double);
 
-            var coordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate);
+            var coordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate);
 
             var pointsFromOriginal = originalKdTree.NearestNeighborsLinear(_coordinatesAsDoubleArray.First(), pointsNeeded);
 
@@ -94,12 +95,12 @@ namespace ClosestNeighbourSearchTests
         {
             var nearestPontsKdTreePristineLinear =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates)
                     .ToList();
 
@@ -121,7 +122,7 @@ namespace ClosestNeighbourSearchTests
 
             var nearestPointsKdTreeLinear =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(_pointPerCluster, _arrayOfCoordinates)
                     .ToList();
 
@@ -141,12 +142,12 @@ namespace ClosestNeighbourSearchTests
         {
             var nearestPontsKdTreePristineLinear =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterRadial(radius: 1000, pointsPerCluster: 500, coordinates: _arrayOfCoordinates)
                     .ToList();
 
@@ -160,12 +161,12 @@ namespace ClosestNeighbourSearchTests
         {
             var nearestPontsKdTreePristineLinear =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             var nearestPointsKdTreePristineRadial =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterRadial(radius: double.MaxValue, pointsPerCluster: 500, coordinates: _arrayOfCoordinates)
                     .ToList();
 
@@ -179,7 +180,7 @@ namespace ClosestNeighbourSearchTests
         {
             var nearestPontsKdTreePristineLinear =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                        Utilities.L2Norm_Squared_Double)
+                        KdTreeHelper.L2Norm_Squared_Double)
                     .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             nearestPontsKdTreePristineLinear[0].Count().Should().Be(_pointPerCluster);
@@ -191,7 +192,7 @@ namespace ClosestNeighbourSearchTests
         {
             var nearestPontsKdTreePristineLinear =
                new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
-                       Utilities.L2Norm_Squared_Double)
+                       KdTreeHelper.L2Norm_Squared_Double)
                    .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
             nearestPontsKdTreePristineLinear.Should().BeOfType<List<List<Coordinate>>>();
@@ -234,8 +235,8 @@ namespace ClosestNeighbourSearchTests
             var minPointA = new[] { minPoint.Latitude, minPoint.Longitude };
             var maxPointA = new[] { maxPoint.Latitude, maxPoint.Longitude };
 
-            var coordinateDistance = Utilities.L2Norm_Squared_Coordinate(minPoint, maxPoint);
-            var doubleArrayDistance = Utilities.L2Norm_Squared_Double(minPointA, maxPointA);
+            var coordinateDistance = KdTreeHelper.L2Norm_Squared_Coordinate(minPoint, maxPoint);
+            var doubleArrayDistance = KdTreeHelper.L2Norm_Squared_Double(minPointA, maxPointA);
 
             coordinateDistance.Should().Be(doubleArrayDistance);
         }

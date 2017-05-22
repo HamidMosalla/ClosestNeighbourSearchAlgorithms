@@ -3,6 +3,7 @@ using System.Linq;
 using ClosestNeighbourSearchAlgorithms;
 using ClosestNeighbourSearchAlgorithms.Contracts;
 using ClosestNeighbourSearchAlgorithms.Models;
+using ClosestNeighbourSearchAlgorithms.Utilities;
 using FluentAssertions;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace ClosestNeighbourSearchTests
         {
             _numberOfCoordinates = 1000;
             _pointPerCluster = 500;
-            _arrayOfCoordinates = Utilities.GenerateCoordinates(_numberOfCoordinates).ToArray();
+            _arrayOfCoordinates = KdTreeHelper.GenerateCoordinates(_numberOfCoordinates).ToArray();
             _listOfCoordinates = _arrayOfCoordinates.ToList();
         }
 

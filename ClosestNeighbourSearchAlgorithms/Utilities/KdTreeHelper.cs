@@ -4,9 +4,9 @@ using System.Linq;
 using ClosestNeighbourSearchAlgorithms.Contracts;
 using ClosestNeighbourSearchAlgorithms.Models;
 
-namespace ClosestNeighbourSearchAlgorithms
+namespace ClosestNeighbourSearchAlgorithms.Utilities
 {
-    public static class Utilities
+    public static class KdTreeHelper
     {
 
         #region Metrics
