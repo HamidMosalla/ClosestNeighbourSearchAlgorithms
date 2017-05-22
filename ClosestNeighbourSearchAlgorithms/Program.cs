@@ -68,7 +68,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch4 = new Stopwatch();
             stopwatch4.Start();
 
-            var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Coordinate)
+            var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
 
             stopwatch4.Stop();
@@ -83,7 +83,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch5 = new Stopwatch();
             stopwatch5.Start();
 
-            var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Coordinate)
+            var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
             stopwatch5.Stop();
 
@@ -97,7 +97,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch6 = new Stopwatch();
             stopwatch6.Start();
 
-            var nearestPontsKdTreeLinearPristine = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Double)
+            var nearestPontsKdTreeLinearPristine = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double)
                                                             .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
 
             stopwatch6.Stop();
@@ -112,7 +112,7 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch7 = new Stopwatch();
             stopwatch7.Start();
 
-            var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, Utilities.KdTreeHelper.L2Norm_Squared_Double)
+            var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double)
                                                              .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
 
             stopwatch7.Stop();
