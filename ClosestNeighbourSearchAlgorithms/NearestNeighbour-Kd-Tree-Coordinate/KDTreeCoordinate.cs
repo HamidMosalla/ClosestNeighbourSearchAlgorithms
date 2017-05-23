@@ -266,25 +266,19 @@ namespace ClosestNeighbourSearchAlgorithms
             // Work out the current dimension
             var dim = dimension % this.Dimensions;
 
-            // Split our hyper-rectangle into 2 sub rectangles along the current
-            // node's point on the current dimension
             var leftRect = rectCoordinate.Clone();
-            leftRect.MaxPoint = this.InternalTreeOfPoints[nodeIndex];
+            //leftRect.MaxPoint = this.InternalTreeOfPoints[nodeIndex];
 
             var rightRect = rectCoordinate.Clone();
-            rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex];
+            //rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex];
 
-            //if (dim == 0)
-            //{
-            //    leftRect.MaxPoint.Latitude = this.InternalTreeOfPoints[nodeIndex].Latitude;
-            //    rightRect.MinPoint.Latitude = this.InternalTreeOfPoints[nodeIndex].Latitude;
-            //}
 
-            //if (dim == 1)
-            //{
-            //    leftRect.MaxPoint.Longitude = this.InternalTreeOfPoints[nodeIndex].Longitude;
-            //    rightRect.MinPoint.Longitude = this.InternalTreeOfPoints[nodeIndex].Longitude;
-            //}
+            leftRect.MaxPoint = this.InternalTreeOfPoints[nodeIndex].ToNextDimension(dim, leftRect.MaxPoint);
+            rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex].ToNextDimension(dim, rightRect.MinPoint);
+
+
+            //Console.WriteLine($"{nodeIndex:00}:Left Rect Min Latitude:{leftRect.MinPoint.Latitude} Longitude: {leftRect.MinPoint.Longitude}");
+            //Console.WriteLine($"{nodeIndex:00}:Left Rect Max Latitude:{leftRect.MaxPoint.Latitude} Longitude: {leftRect.MaxPoint.Longitude}");
 
             // Determine which side the target resides in
             var compare = dim == 0 ? target.Latitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Latitude)

@@ -192,6 +192,24 @@ namespace ClosestNeighbourSearchAlgorithms.Utilities
             return dimension;
         }
 
+        public static TDimension ToNextDimension<TDimension>(this TDimension currentDimension, int dim, TDimension point) where TDimension : ICoordinate, new()
+        {
+            var dimension = new TDimension();
+
+            if (dim == 0)
+            {
+                dimension.Latitude = currentDimension.Latitude;
+                dimension.Longitude = point.Longitude;
+
+                return dimension;
+            }
+
+            dimension.Longitude = currentDimension.Longitude;
+            dimension.Latitude = point.Latitude;
+
+            return dimension;
+        }
+
         #endregion
 
     }

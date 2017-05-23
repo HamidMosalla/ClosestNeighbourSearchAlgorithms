@@ -35,29 +35,32 @@ namespace ClosestNeighbourSearchTests
             var linearSearchWithCoordinateKdTree = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
                                                              .NearestNeighborClusterLinear(500, _arrayOfCoordinates).ToList();
 
-            //var radialSearchWithOriginalKdTreeRadial = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, Utilities.L2Norm_Squared_Double)
-            //                                                 .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+            var radialSearchWithOriginalKdTreeRadial = new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double)
+                                                             .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
 
-            //var radialSearchWithCoordinateKdTreeRadial = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, Utilities.L2Norm_Squared_Coordinate)
-            //                                                 .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+            var radialSearchWithCoordinateKdTreeRadial = new KDTreeCoordinate<Coordinate>(2, _arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
+                                                             .NearestNeighborClusterRadial(radius: Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: _arrayOfCoordinates).ToList();
+
+            linearSearchWithOriginalKdTree[0]
+                .SequenceEqual(linearSearchWithCoordinateKdTree[0])
+                .Should()
+                .BeTrue();
+
+            linearSearchWithOriginalKdTree[1]
+                .SequenceEqual(linearSearchWithCoordinateKdTree[1])
+                .Should()
+                .BeTrue();
 
 
+            radialSearchWithOriginalKdTreeRadial[0]
+                .SequenceEqual(radialSearchWithCoordinateKdTreeRadial[0])
+                .Should()
+                .BeTrue();
 
-            for (int i = 0; i < 300; i++)
-            {
-                linearSearchWithOriginalKdTree[0][i].CoordinateId.Should().Be(linearSearchWithCoordinateKdTree[0][i].CoordinateId);
-            }
-
-
-            //radialSearchWithOriginalKdTreeLinear[0].OrderBy(e=>e.CoordinateId)
-            //    .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[0].OrderBy(e => e.CoordinateId))
-            //    .Should()
-            //    .BeTrue();
-
-            //radialSearchWithOriginalKdTreeLinear[1].OrderBy(e => e.CoordinateId)
-            //    .SequenceEqual(radialSearchWithCoordinateKdTreeLinear[1].OrderBy(e => e.CoordinateId))
-            //    .Should()
-            //    .BeTrue();
+            radialSearchWithOriginalKdTreeRadial[1]
+                .SequenceEqual(radialSearchWithCoordinateKdTreeRadial[1])
+                .Should()
+                .BeTrue();
         }
 
         [Fact]
@@ -116,9 +119,10 @@ namespace ClosestNeighbourSearchTests
         }
 
         [Fact]
-        public void KdTreeLinearSearch_ReturnsTheSameResultAs_NearestNeighbourBruteForce()
+        public void KdTreeLinearSearchDoubleArray_ReturnsTheSameResultAs_NearestNeighbourBruteForce()
         {
-            var pathClusterFinderWithListNeighboringPoints = new PathClusterFinderWithList(_listOfCoordinates, _pointPerCluster).GetPointClusters().ToList();
+            var pathClusterFinderWithListNeighboringPoints = new PathClusterFinderWithList(_listOfCoordinates, _pointPerCluster)
+                                                                                .GetPointClusters().ToList();
 
             var nearestPointsKdTreeLinear =
                 new KDTree<double, Coordinate>(2, _coordinatesAsDoubleArray, _arrayOfCoordinates,
@@ -127,12 +131,35 @@ namespace ClosestNeighbourSearchTests
                     .ToList();
 
             pathClusterFinderWithListNeighboringPoints[0].OrderBy(k => k.CoordinateId)
-                .SequenceEqual(nearestPointsKdTreeLinear[0])
+                .SequenceEqual(nearestPointsKdTreeLinear[0].OrderBy(k => k.CoordinateId))
                 .Should()
                 .BeTrue();
 
             pathClusterFinderWithListNeighboringPoints[1].OrderBy(k => k.CoordinateId)
-                .SequenceEqual(nearestPointsKdTreeLinear[1])
+                .SequenceEqual(nearestPointsKdTreeLinear[1].OrderBy(k => k.CoordinateId))
+                .Should()
+                .BeTrue();
+        }
+
+        [Fact]
+        public void KdTreeLinearSearchCoordinate_ReturnsTheSameResultAs_NearestNeighbourBruteForce()
+        {
+            var pathClusterFinderWithListNeighboringPoints = new PathClusterFinderWithList(_listOfCoordinates, _pointPerCluster)
+                                                                                .GetPointClusters().ToList();
+
+            var nearestPointsKdTreeLinear =
+                new KDTreeCoordinate< Coordinate>(2, _arrayOfCoordinates,
+                        KdTreeHelper.L2Norm_Squared_Coordinate)
+                    .NearestNeighborClusterLinear(_pointPerCluster, _arrayOfCoordinates)
+                    .ToList();
+
+            pathClusterFinderWithListNeighboringPoints[0].OrderBy(k => k.CoordinateId)
+                .SequenceEqual(nearestPointsKdTreeLinear[0].OrderBy(k => k.CoordinateId))
+                .Should()
+                .BeTrue();
+
+            pathClusterFinderWithListNeighboringPoints[1].OrderBy(k => k.CoordinateId)
+                .SequenceEqual(nearestPointsKdTreeLinear[1].OrderBy(k => k.CoordinateId))
                 .Should()
                 .BeTrue();
         }

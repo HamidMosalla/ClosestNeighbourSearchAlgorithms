@@ -47,17 +47,6 @@ namespace ClosestNeighbourSearchAlgorithms
             rect.MaxPoint = maxPoint;
 
             return rect;
-
-            //rect.MinPoint = new TDimension();
-            //rect.MaxPoint = new TDimension();
-
-            //rect.MinPoint.Latitude = negativeInfinity;
-            //rect.MinPoint.Longitude = negativeInfinity;
-
-            //rect.MaxPoint.Latitude = positiveInfinity;
-            //rect.MaxPoint.Longitude = positiveInfinity;
-
-            //return rect;
         }
 
         /// <summary>
