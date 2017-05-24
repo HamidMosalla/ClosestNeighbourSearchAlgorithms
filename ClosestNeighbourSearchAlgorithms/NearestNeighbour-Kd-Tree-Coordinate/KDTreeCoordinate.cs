@@ -281,17 +281,6 @@ namespace ClosestNeighbourSearchAlgorithms
                 rightRect.MinPoint.Longitude = this.InternalTreeOfPoints[nodeIndex].Longitude;
             }
 
-
-
-            //leftRect.MaxPoint = this.InternalTreeOfPoints[nodeIndex].ToNextDimension(dim, leftRect.MaxPoint);
-            //rightRect.MinPoint = this.InternalTreeOfPoints[nodeIndex].ToNextDimension(dim, rightRect.MinPoint);
-
-            if (nodeIndex > 10000 && nodeIndex < 10100)
-            {
-                Console.WriteLine($"{nodeIndex:00}:Left Rect Min Latitude:{leftRect.MinPoint.Latitude} Longitude: {leftRect.MinPoint.Longitude}");
-                Console.WriteLine($"{nodeIndex:00}:Left Rect Max Latitude:{leftRect.MaxPoint.Latitude} Longitude: {leftRect.MaxPoint.Longitude}");
-            }
-
             // Determine which side the target resides in
             var compare = dim == 0 ? target.Latitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Latitude)
                                    : target.Longitude.CompareTo(this.InternalTreeOfPoints[nodeIndex].Longitude);

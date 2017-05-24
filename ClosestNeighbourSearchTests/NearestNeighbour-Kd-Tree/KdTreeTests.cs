@@ -83,7 +83,7 @@ namespace ClosestNeighbourSearchTests
 
             for (int i = 0; i < _numberOfCoordinates; i++)
             {
-                if (coordinateKdTree.InternalTreeOfPoints[i].CoordinateId != 0)
+                if (coordinateKdTree.InternalTreeOfPoints[i] != null)
                     originalKdTree.InternalPointArray[i][0].Should().Be(coordinateKdTree.InternalTreeOfPoints[i].Latitude);
             }
         }

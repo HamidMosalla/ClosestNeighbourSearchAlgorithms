@@ -334,14 +334,6 @@ namespace ClosestNeighbourSearchAlgorithms
             var rightRect = rect.Clone();
             rightRect.MinPoint[dim] = this.InternalPointArray[nodeIndex][dim];
 
-            if (nodeIndex > 10000 && nodeIndex < 10100)
-            {
-                Console.WriteLine($"{nodeIndex:00}:Left Rect Min Latitude:{leftRect.MinPoint[0]} Longitude: {leftRect.MinPoint[1]}");
-                Console.WriteLine($"{nodeIndex:00}:Left Rect Max Latitude:{leftRect.MaxPoint[0]} Longitude: {leftRect.MaxPoint[1]}");
-            }
-
-
-
             // Determine which side the target resides in
             var compare = target[dim].CompareTo(this.InternalPointArray[nodeIndex][dim]);
 
