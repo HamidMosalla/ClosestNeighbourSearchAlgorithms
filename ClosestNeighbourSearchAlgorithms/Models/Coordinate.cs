@@ -3,7 +3,7 @@ using ClosestNeighbourSearchAlgorithms.Contracts;
 
 namespace ClosestNeighbourSearchAlgorithms.Models
 {
-    public struct Coordinate : IComparable<Coordinate>, ICoordinate
+    public class Coordinate : IComparable<Coordinate>, ICoordinate
     {
         public long CoordinateId { get; set; }
         public double Latitude { get; set; }
@@ -14,7 +14,7 @@ namespace ClosestNeighbourSearchAlgorithms.Models
 
         public override bool Equals(object obj)
         {
-            Coordinate? c = obj as Coordinate?;
+            Coordinate c = obj as Coordinate;
 
             if (c?.CoordinateId == CoordinateId)
                 return true;
@@ -47,7 +47,7 @@ namespace ClosestNeighbourSearchAlgorithms.Models
 
         public int CompareTo(Coordinate obj)
         {
-            Coordinate? other = obj as Coordinate?;
+            Coordinate other = obj;
 
             //compares latitudes
             if (this.Latitude < other?.Latitude) return -1;

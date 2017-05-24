@@ -34,17 +34,14 @@ namespace ClosestNeighbourSearchAlgorithms
         {
             var rect = default(HyperRectCoordinate<TDimension>);
 
-            var minPoint = new TDimension();
-            var maxPoint = new TDimension();
+            rect.MinPoint = new TDimension();
+            rect.MaxPoint = new TDimension();
 
-            minPoint.Latitude = negativeInfinity;
-            minPoint.Longitude = negativeInfinity;
+            rect.MinPoint.Latitude = negativeInfinity;
+            rect.MinPoint.Longitude = negativeInfinity;
 
-            maxPoint.Latitude = positiveInfinity;
-            maxPoint.Longitude = positiveInfinity;
-
-            rect.MinPoint = minPoint;
-            rect.MaxPoint = maxPoint;
+            rect.MaxPoint.Latitude = positiveInfinity;
+            rect.MaxPoint.Longitude = positiveInfinity;
 
             return rect;
         }
@@ -97,8 +94,19 @@ namespace ClosestNeighbourSearchAlgorithms
             // For a discussion of why we don't implement ICloneable
             // see http://stackoverflow.com/questions/536349/why-no-icloneablet
             var rect = default(HyperRectCoordinate<TDimension>);
-            rect.MinPoint = this.MinPoint;
-            rect.MaxPoint = this.MaxPoint;
+
+            rect.MinPoint = new TDimension
+            {
+                Latitude = this.MinPoint.Latitude,
+                Longitude = this.MinPoint.Longitude
+            };
+
+            rect.MaxPoint = new TDimension
+            {
+                Latitude = this.MaxPoint.Latitude,
+                Longitude = this.MaxPoint.Longitude
+            };
+
             return rect;
         }
     }

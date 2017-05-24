@@ -26,10 +26,10 @@ PathClusterFinder KdTree With Double Array Linear Took: 1667 Milliseconds
 PathClusterFinder KdTree With Double Array Radial Took: 2830 Milliseconds
 =========================================================================================
 For 1,000,000 Points:
-PathClusterFinder KdTree With Coordinate Linear Took: 13687 Milliseconds
-PathClusterFinder KdTree With Coordinate Radial Took: 15666 Milliseconds
-PathClusterFinder KdTree With Double Array Linear Took: 24216 Milliseconds
-PathClusterFinder KdTree With Double Array Radial Took: 25765 Milliseconds
+PathClusterFinder KdTree With Coordinate Linear Took: 26261 Milliseconds
+PathClusterFinder KdTree With Coordinate Radial Took: 52297 Milliseconds
+PathClusterFinder KdTree With Double Array Linear Took: 25146 Milliseconds
+PathClusterFinder KdTree With Double Array Radial Took: 26743 Milliseconds
 =========================================================================================
 For 2,000,000 Points:
 PathClusterFinder KdTree With Coordinate Linear Took: 31064 Milliseconds

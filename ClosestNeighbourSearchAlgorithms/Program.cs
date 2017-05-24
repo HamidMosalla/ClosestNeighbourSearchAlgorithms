@@ -12,7 +12,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 1000000;
+            var numberOfCoordinates = 10000;
             var coordinatesAsDoubleArray = Utilities.KdTreeHelper.GenerateDoubles(numberOfCoordinates, range: 10000);
             var arrayOfCoordinates = Utilities.KdTreeHelper.GenerateCoordinatesFromArray(coordinatesAsDoubleArray).ToArray();
             var listOfCoordinates = arrayOfCoordinates.ToList();
@@ -68,8 +68,8 @@ namespace ClosestNeighbourSearchAlgorithms
             var stopwatch4 = new Stopwatch();
             stopwatch4.Start();
 
-            var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
+            var nearestPointsKdTreeWithCoordinateLinear = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates.Copy(), KdTreeHelper.L2Norm_Squared_Coordinate)
+                                                             .NearestNeighborClusterLinear(500, arrayOfCoordinates.Copy()).ToList();
 
             stopwatch4.Stop();
 
@@ -79,26 +79,26 @@ namespace ClosestNeighbourSearchAlgorithms
             //==========================================================================================
 
 
-            //==========================================================================================
-            var stopwatch5 = new Stopwatch();
-            stopwatch5.Start();
+            ////==========================================================================================
+            //var stopwatch5 = new Stopwatch();
+            //stopwatch5.Start();
 
-            var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Coordinate)
-                                                             .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
-            stopwatch5.Stop();
+            //var nearestPointsKdTreeWithCoordinateRadial = new KDTreeCoordinate<Coordinate>(2, arrayOfCoordinates.Copy(), KdTreeHelper.L2Norm_Squared_Coordinate)
+            //                                                 .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates.Copy()).ToList();
+            //stopwatch5.Stop();
 
-            var elapsedTimeKdTreeWithCoordinateRadial = stopwatch5.ElapsedMilliseconds;
+            //var elapsedTimeKdTreeWithCoordinateRadial = stopwatch5.ElapsedMilliseconds;
 
-            Console.WriteLine($"PathClusterFinder KdTree With Coordinate Radial Took: {elapsedTimeKdTreeWithCoordinateRadial} Milliseconds");
-            //==========================================================================================
+            //Console.WriteLine($"PathClusterFinder KdTree With Coordinate Radial Took: {elapsedTimeKdTreeWithCoordinateRadial} Milliseconds");
+            ////==========================================================================================
 
-
+            Console.Clear();
             //==========================================================================================
             var stopwatch6 = new Stopwatch();
             stopwatch6.Start();
 
-            var nearestPontsKdTreeLinearPristine = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double)
-                                                            .NearestNeighborClusterLinear(500, arrayOfCoordinates).ToList();
+            var nearestPontsKdTreeLinearPristine = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray.Copy(), arrayOfCoordinates.Copy(), KdTreeHelper.L2Norm_Squared_Double)
+                                                            .NearestNeighborClusterLinear(500, arrayOfCoordinates.Copy()).ToList();
 
             stopwatch6.Stop();
 
@@ -108,19 +108,19 @@ namespace ClosestNeighbourSearchAlgorithms
             //==========================================================================================
 
 
-            //==========================================================================================
-            var stopwatch7 = new Stopwatch();
-            stopwatch7.Start();
+            ////==========================================================================================
+            //var stopwatch7 = new Stopwatch();
+            //stopwatch7.Start();
 
-            var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray, arrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double)
-                                                             .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates).ToList();
+            //var nearestPointsKdTreePristineRadial = new KDTree<double, Coordinate>(2, coordinatesAsDoubleArray.Copy(), arrayOfCoordinates.Copy(), KdTreeHelper.L2Norm_Squared_Double)
+            //                                                 .NearestNeighborClusterRadial(Radius.SuperSlowButAccurate, pointsPerCluster: 500, coordinates: arrayOfCoordinates.Copy()).ToList();
 
-            stopwatch7.Stop();
+            //stopwatch7.Stop();
 
-            var elapsedTimeKdTreeRadialPristine = stopwatch7.ElapsedMilliseconds;
+            //var elapsedTimeKdTreeRadialPristine = stopwatch7.ElapsedMilliseconds;
 
-            Console.WriteLine($"PathClusterFinder KdTree With Double Array Radial Took: {elapsedTimeKdTreeRadialPristine} Milliseconds");
-            //==========================================================================================
+            //Console.WriteLine($"PathClusterFinder KdTree With Double Array Radial Took: {elapsedTimeKdTreeRadialPristine} Milliseconds");
+            ////==========================================================================================
         }
     }
 }
