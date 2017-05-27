@@ -12,7 +12,7 @@ namespace ClosestNeighbourSearchAlgorithms
     {
         public static void Main(string[] args)
         {
-            var numberOfCoordinates = 1000000;
+            var numberOfCoordinates = 1000;
             var coordinatesAsDoubleArray = Utilities.KdTreeHelper.GenerateDoubles(numberOfCoordinates, range: 10000);
             var arrayOfCoordinates = Utilities.KdTreeHelper.GenerateCoordinatesFromArray(coordinatesAsDoubleArray).ToArray();
             var listOfCoordinates = arrayOfCoordinates.ToList();

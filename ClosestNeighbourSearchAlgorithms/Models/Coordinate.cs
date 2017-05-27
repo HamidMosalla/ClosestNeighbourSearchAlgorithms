@@ -3,7 +3,7 @@ using ClosestNeighbourSearchAlgorithms.Contracts;
 
 namespace ClosestNeighbourSearchAlgorithms.Models
 {
-    public class Coordinate : IComparable<Coordinate>, ICoordinate
+    public class Coordinate : IComparable<Coordinate>, IEquatable<Coordinate>, ICoordinate
     {
         public long CoordinateId { get; set; }
         public double Latitude { get; set; }
@@ -22,6 +22,14 @@ namespace ClosestNeighbourSearchAlgorithms.Models
             return false;
         }
 
+        public bool Equals(Coordinate other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return CoordinateId == other.CoordinateId && Latitude.Equals(other.Latitude) && Longitude.Equals(other.Longitude);
+        }
+
         public override int GetHashCode()
         {
             unchecked
@@ -33,6 +41,19 @@ namespace ClosestNeighbourSearchAlgorithms.Models
                 return hash;
             }
         }
+
+        public static bool operator ==(Coordinate lhs, Coordinate rhs)
+        {
+            if (ReferenceEquals(lhs, null) && ReferenceEquals(rhs, null)) return true;
+
+            return Equals(lhs, rhs);
+
+            //less readable
+            //if (!ReferenceEquals(lhs, null)) return lhs.Equals(rhs);
+            //return ReferenceEquals(rhs, null);
+        }
+
+        public static bool operator !=(Coordinate lhs, Coordinate rhs) => !(lhs == rhs);
 
         public double Distance(Coordinate otherCoordinate)
         {
