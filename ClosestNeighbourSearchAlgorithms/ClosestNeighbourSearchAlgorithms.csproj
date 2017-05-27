@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Contracts\ICoordinate.cs" />
+    <Compile Include="Models\PointCluster.cs" />
     <Compile Include="Models\Radius.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree-Coordinate\BinaryTreeNavigationCoordinate.cs" />
     <Compile Include="NearestNeighbour-Kd-Tree-Coordinate\BinaryTreeNavigatorCoordinate.cs" />

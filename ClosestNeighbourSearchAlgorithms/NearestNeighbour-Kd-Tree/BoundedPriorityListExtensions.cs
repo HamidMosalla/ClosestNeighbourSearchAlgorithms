@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using ClosestNeighbourSearchAlgorithms.Contracts;
+using ClosestNeighbourSearchAlgorithms.Models;
 
 namespace ClosestNeighbourSearchAlgorithms
 {
@@ -67,5 +69,13 @@ namespace ClosestNeighbourSearchAlgorithms
 
             return clusterOfCoordinates;
         }
+
+        public static List<PointCluster> ToPointClosters(this IEnumerable<List<Coordinate>> coordinates)
+        {
+            //return coordinates.Select(c => new PointCluster { PointClusterCoordinates = c, IdPlaceTree = c.First().IdPlaceTree }).ToList();
+            return null;
+        }
+
+        public static double[][] ToArrayOfDoubles(this Coordinate[] coordinates) => coordinates.Select(c => new[] { c.Latitude, c.Longitude }).ToArray();
     }
 }

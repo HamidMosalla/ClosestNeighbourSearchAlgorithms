@@ -29,7 +29,7 @@ namespace ClosestNeighbourSearchTests
 
         public KdTreeTests()
         {
-            _numberOfCoordinates = 1000;
+            _numberOfCoordinates = 10000;
             _pointPerCluster = 500;
             _coordinatesAsDoubleArray = KdTreeHelper.GenerateDoubles(_numberOfCoordinates, range: 10000);
             _arrayOfCoordinates = KdTreeHelper.GenerateCoordinatesFromArray(_coordinatesAsDoubleArray).ToArray();
@@ -175,7 +175,7 @@ namespace ClosestNeighbourSearchTests
                 .BeTrue();
         }
 
-        [Fact(Skip = "It shouldn't be like this, at least theoretically.")]
+        [Fact]//(Skip = "It shouldn't be like this, at least theoretically.")]
         public void KdTreeSearchLinearAndRadial_ShouldNotBeTheSame()
         {
             var nearestPontsKdTreePristineLinear =
