@@ -1,0 +1,293 @@
+﻿@model CapillarySale.ViewModel.Admin.PathFinder.PathFinderIndexViewModel
+@{
+    ViewBag.Title = "ثبت مسیر";
+}
+
+@section styles{
+
+}
+
+<div class="k-rtl">
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12 k-rtl">
+            <div class="widget">
+
+                <div class="widget-header bordered-bottom bordered-purple">
+                    <span class="widget-caption">ثبت مسیر</span>
+                </div>
+
+                <div class="widget-body" id="path-finder-form-container">
+
+                    @using (Html.BeginForm("Index", "PathFinder", FormMethod.Post, new { id = "path-finder-form" }))
+                    {
+                        <div class="form-horizontal">
+
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="row" id="path-finder-form-div">
+                                <div class="col-md-8">
+                                    <div class="col-md-12">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ProvinceSelect, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.ProvinceSelect, Model.ProviceSelectListItems, "انتخاب استان", new { @class = "form-control chosen-select" })
+                                                    @Html.ValidationMessageFor(model => model.ProvinceSelect, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.CitySelect, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.CitySelect, Model.CitySelectListItems, "انتخاب شهرستان", new { @class = "form-control chosen-select" })
+                                                    @Html.ValidationMessageFor(model => model.CitySelect, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.FaaliatGroupSelect, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.FaaliatGroupSelect, Model.FaaliatGroupSelectListItems, new { @class = "form-control chosen-select", multiple = "multiple" })
+                                                    @Html.ValidationMessageFor(model => model.FaaliatGroupSelect, "", new { @class = "text-danger" })
+                                                    <span class="label label-info" style="display: none;" id="submitted-points-label">
+                                                        نقطه ای یافت نشد.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.PointsOnPath, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.PointsOnPath, new { htmlAttributes = new { @class = "form-control", min = "1" } })
+                                                    @Html.ValidationMessageFor(model => model.PointsOnPath, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.DefaultTimeDistribution, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.DefaultTimeDistribution, new { htmlAttributes = new { @class = "form-control", min = "1", max = "999" } })
+                                                    @Html.ValidationMessageFor(model => model.DefaultTimeDistribution, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.TourTimeSpan, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.TourTimeSpan, new { htmlAttributes = new { @class = "form-control", min = "1", max = "999" } })
+                                                    @Html.ValidationMessageFor(model => model.TourTimeSpan, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.TarikhEtebarFrom, new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => model.TarikhEtebarFrom, new { @class = "form-control", @placeholder = "لطفا یک تاریخ انتخاب کنید", @data_FromDate = "true", data_mddatetimepicker = "true", data_GroupId = "group2" })
+                                                    @Html.ValidationMessageFor(model => model.TarikhEtebarFrom, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-6 col-xs-12 no-padding-right">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.TarikhEtebarTo, new { @class = "control-label col-md-4" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => model.TarikhEtebarTo, new { @class = "form-control", @placeholder = "لطفا یک تاریخ انتخاب کنید", @data_FromDate = "true", data_mddatetimepicker = "true", data_GroupId = "group2" })
+                                                    @Html.ValidationMessageFor(model => model.TarikhEtebarTo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="col-md-4 no-padding">
+                                    <div class="col-md-11" style="display: none; direction: rtl;" id="submitted-point-table">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.SubmittedPoints, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-8">
+                                                <span style="font-size: medium;">@Model.SubmittedPoints</span>
+
+
+                                                <table class="table table-hover table-striped table-responsive">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>نام گروه فعالیت</th>
+                                                            <th>تعداد اشتراک</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody id="submitted-point-table-body"></tbody>
+                                                    <tr style="border-top: 2px solid #000000;">
+                                                        <td></td>
+                                                        <td id="total-point"></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-2 col-md-offset-10">
+                                        <a id="check-path" class="btn btn-lg btn-info" style="width: 100%;">بررسی</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <hr />
+
+
+
+                            <div class="k-rtl" style="display:none;" id="path-grid-div-container">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12 k-rtl">
+                                        <div class="widget">
+                                            <div class="widget-header bordered-bottom bordered-purple">
+                                                <span class="widget-caption">جدول مسیر ها</span>
+                                                <div class="widget-buttons">
+                                                    <a href="#" data-toggle="maximize">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
+                                                    <a href="#" data-toggle="collapse">
+                                                        <i class="fa fa-minus"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="widget-body">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <div id="path-grid-div" style="height:478px; overflow-y:scroll;"></div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="k-rtl" style="display:none;" id="path-eshterak-div-container">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12 k-rtl">
+                                        <div class="widget">
+
+                                            <div class="widget-header bordered-bottom bordered-purple">
+                                                <span class="widget-caption path-eshterak-div-container-widget-caption">جدول اشتراک مسیر</span>
+                                                <div class="widget-buttons">
+                                                    <a href="#" data-toggle="maximize">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
+                                                    <a href="#" data-toggle="collapse">
+                                                        <i class="fa fa-minus"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="widget-body">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <div id="path-eshterak-div"></div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="submit-paths-button-container" style="display:none;">
+                                <div class="col-md-12">
+                                    <button id="submit-paths-button" class="btn btn-lg btn-success" style="width:100%;">ثبت نهایی</button>
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="form-group" style="display:none; direction: ltr!important;" id="map-container">
+                                <div class="col-md-12">
+                                    <div id="map" style="width:100%!important;height:950px!important"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Change Eshterak Path Modal *@
+<div class="modal fade" id="change-eshterak-path-modal" tabindex="-1" role="dialog" aria-labelledby="change-eshterak-path-modal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="change-eshterak-path-modal-label">تغییر مسیر</h4>
+            </div>
+
+            <div class="modal-body" id="change-eshterak-path-modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary" id="submit-change-path-button">ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Startup.CDNServerURL/Scripts/system.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDo2AgtanBDBJ3npVsxbw86nka5nhmSURQ"></script>
+    <script src="~/Scripts/Helpers/Spin.PartOfPageWithoutEvent.js"></script>
+    <script src="~/Scripts/Helpers/PNotifyModule.js"></script>
+    <script>
+        SystemJS.config({
+            baseURL: '/Scripts/Admin/PathFinder',
+            defaultJSExtensions: true
+        });
+
+        SystemJS.import('Main');
+    </script>
+}

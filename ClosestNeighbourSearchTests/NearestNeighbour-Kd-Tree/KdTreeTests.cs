@@ -192,6 +192,23 @@ namespace ClosestNeighbourSearchTests
         }
 
         [Fact]
+        public void NearestNeighborsRadial_ReturnsTheClosestPoints_EvenIfTheRadiusHasMorePointsInItsSroundingThanDefined()
+        {
+            var pointsNeeded = 4;
+            var center = ArrayOfCoordinates.First();
+            var coordinatesSortedByDistanceToCenter = ArrayOfCoordinates.OrderBy(c => c.Distance(center)).ToList();
+
+            var kdTree = new KDTree<double, Coordinate>(2, CoordinatesAsDoubleArray, ArrayOfCoordinates, KdTreeHelper.L2Norm_Squared_Double);
+
+            var searchedPoints = kdTree.NearestNeighborsRadial(new[] { center.Latitude, center.Longitude }, double.MaxValue, pointsNeeded);
+
+            searchedPoints[0].Should().Be(coordinatesSortedByDistanceToCenter[0]);
+            searchedPoints[1].Should().Be(coordinatesSortedByDistanceToCenter[1]);
+            searchedPoints[2].Should().Be(coordinatesSortedByDistanceToCenter[2]);
+            searchedPoints[3].Should().Be(coordinatesSortedByDistanceToCenter[3]);
+        }
+
+        [Fact]
         public void KdTreeSearchLinearAndRadia_ShouldBeTheSame_IfRadiusOfRadialIsDoubleMax()
         {
             var nearestPontsKdTreePristineLinear =

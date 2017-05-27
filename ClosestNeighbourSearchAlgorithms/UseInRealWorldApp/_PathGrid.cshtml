@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CapillarySale.ViewModel.Admin.PathFinder.PathGrid>
+
+<table class="table table-hover table-striped table-responsive" style="width:100%;" id="path-grid-table">
+
+    <thead>
+        <tr>
+            <th>ردیف</th>
+            <th>نام مسیر</th>
+            <th>بازه زمانی توزیع</th>
+            <th>بازه زمانی تور</th>
+            <th>تعداد نقاط در مسیر</th>
+            <th>انحراف</th>
+            <th>پتانسیل فروش</th>
+            <th>گرید ریالی</th>
+            <th>گرید اولیه بازار</th>
+            <th>فاصله نقطه شروع تا پایان</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+
+    <tbody id="path-grid-table-body">
+
+        @foreach (var item in Model)
+        {
+            <tr data-temporary-path-id="@item.TemporaryId">
+                <td style="width:130px">
+                    
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" class="path-checkbox" id="path-checkbox" value="@item.TemporaryId" @*@(item.Checked ? "checked" : "")*@ name="path-checkbox">
+                            <span class="text"></span> - @item.RowNumber
+                        </label> 
+                    </div>
+
+                </td>
+                <td><input type="text" value="@item.PathName" id="path-name" name="path-name" /></td>
+                <td><input type="number" min="1" max="999" id="default-time-distribution" name="default-time-distribution" value="@item.ToziZamaniPishfarz" /></td>
+                <td><input type="number" min="1" max="999" id="tour-time-span" name="tour-time-span" value="@item.BazeZamaniTour" /></td>
+                <td id="point-per-cluster">@item.PointsPerCluster</td>
+                <td id="enheraf">@item.Enheraf</td>
+                <td id="sale-potential">@item.PotansiyelForoosh</td>
+                <td id="grade-riyali">@item.GradeRiyali</td>
+                <td id="grade-avaliye-bazar">@item.GradeAvaliyeBazar</td>
+                <td id="origin-destination-distance">@item.OriginDestinationDistance کیلومتر</td>
+                <td><a class="btn btn-sm btn-primary show-eshterak-button" data-temporary-in-memory-id="@item.TemporaryId" data-path-name="@item.PathName">نمایش اشتراک</a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

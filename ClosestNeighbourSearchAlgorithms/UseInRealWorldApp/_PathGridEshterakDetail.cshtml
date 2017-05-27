@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CapillarySale.ViewModel.Admin.PathFinderEdit.PathsEshterakGridModel>
+
+<table class="table table-hover table-striped table-responsive" id="path-eshterak-table">
+
+    <thead>
+        <tr>
+            <th>ردیف</th>
+            <th>کد مشتری</th>
+            <th>نام مشتری</th>
+            <th>فعالیت</th>
+            <th>آدرس</th>
+            <th>نقطه جغرافیایی</th>
+            <th>پتانسیل فروش</th>
+            <th>گرید ریالی</th>
+            <th>گرید اولیه بازار</th>
+            <th>انتقال به مسیر</th>
+            <th>حذف از مسیر</th>
+        </tr>
+    </thead>
+
+    <tbody id="path-eshterak-table-body">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RowNumber</td>
+                <td>@item.CustomerCode</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Faaliat</td>
+                <td>@item.Address</td>
+                <td>@string.Format("Latitude: {0} Longitude: {1}", item.GeoLocation.Latitude, item.GeoLocation.Longitude)</td>
+                <td>@item.SalePotential</td>
+                <td>@item.RialiGrade</td>
+                <td>@item.GradeAvaliyeBazar</td>
+                <td><a class="btn btn-sm btn-success change-eshterak-path-button" data-temporary-path-id="@item.PathTemporaryId" data-eshterak-id="@item.EshterakId">انتقال به مسیر</a></td>
+                <td><a class="btn btn-sm btn-danger remove-eshterak-path-button" data-temporary-path-id="@item.PathTemporaryId" data-eshterak-id="@item.EshterakId">حذف از مسیر</a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

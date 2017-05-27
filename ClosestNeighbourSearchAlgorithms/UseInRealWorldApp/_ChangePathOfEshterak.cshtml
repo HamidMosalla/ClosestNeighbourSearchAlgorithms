@@ -1,0 +1,24 @@
+﻿@model CapillarySale.ViewModel.Admin.PathFinder.ChangePathOfEshterakViewModel
+
+<div class="form-horizontal" id="change-path-form">
+
+    @Html.HiddenFor(model => model.EshterakId)
+    @Html.HiddenFor(model => model.TemporaryPathId)
+
+    <div class="form-group">
+        <label class="control-label col-md-4">نام مسیر قبلی: </label>
+        <div class="col-md-8">
+            @Model.PreviousPathName
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PathSelect, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.DropDownListFor(model => model.PathSelect, Model.PathSelectListItems, "مسیر جدید را انتخاب کنید" , new { @class = "form-control", style="width:100%;" })
+            @Html.ValidationMessageFor(model => model.PathSelect, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+</div>
